@@ -957,8 +957,16 @@ return {
     },
   },
   {
-    "simrat39/rust-tools.nvim",
-    opts = {},
+    "mrcjkb/rustaceanvim",
+    version = "^4", -- Recommended in the README
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+      "mfussenegger/nvim-dap",
+    },
+    ft = { "rust" },
+    config = function()
+      require("plugins.rustaceanvim")
+    end,
   },
   {
     "wakatime/vim-wakatime",

@@ -68,22 +68,6 @@ lspconfig.lua_ls.setup({
   settings = require("lsp.servers.lua_ls").settings,
 })
 
-lspconfig.rust_analyzer.setup({
-  handlers = handlers,
-  on_attach = on_attach,
-  settings = {
-    ['rust-analyzer'] = {
-      checkOnSave = {
-        allFeatures = true,
-        overrideCommand = {
-          'cargo', 'clippy', '--workspace', '--message-format=json',
-          '--all-targets', '--all-features',
-        },
-      },
-    },
-  }
-})
-
 for _, server in ipairs({ "bashls",  "graphql",  "clangd" }) do
   lspconfig[server].setup({
     on_attach = on_attach,
