@@ -32,6 +32,11 @@ return {
   },
   {
     "ellisonleao/gruvbox.nvim",
+    lazy = true,
+    priority = 900,
+  },
+  {
+    "slugbyte/lackluster.nvim",
     lazy = false,
     priority = 1000,
     config = function()
@@ -389,39 +394,6 @@ return {
   { "tpope/vim-repeat", lazy = false },
   { "tpope/vim-speeddating", lazy = false },
   { "dhruvasagar/vim-table-mode", ft = { "markdown" } },
-  {
-    "smoka7/multicursors.nvim",
-    event = "VeryLazy",
-    dependencies = {
-      "nvim-treesitter/nvim-treesitter",
-      "smoka7/hydra.nvim",
-    },
-    opts = {
-      hint_config = {
-        border = EcoVim.ui.float.border or "rounded",
-        position = "bottom",
-        show_name = false,
-      },
-    },
-    keys = {
-      {
-        "<LEADER>m",
-        "<CMD>MCstart<CR>",
-        desc = "multicursor",
-      },
-      {
-        "<LEADER>m",
-        "<CMD>MCvisual<CR>",
-        mode = "v",
-        desc = "multicursor",
-      },
-      {
-        "<C-Down>",
-        "<CMD>MCunderCursor<CR>",
-        desc = "multicursor down",
-      },
-    },
-  },
   {
     "otavioschwanck/arrow.nvim",
     lazy = false,
