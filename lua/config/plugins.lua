@@ -37,12 +37,8 @@ return {
   },
   {
     "slugbyte/lackluster.nvim",
-    lazy = false,
-    priority = 1000,
-    config = function()
-      -- load the colorscheme here
-      require("config.colorscheme")
-    end,
+    lazy = true,
+    priority = 900,
   },
   {
     "sainnhe/everforest",
@@ -53,6 +49,15 @@ return {
     "alexmozaidze/palenight.nvim",
     priority = 900,
     lazy = true,
+  },
+  {
+    "blazkowolf/gruber-darker.nvim",
+    priority = 1000,
+    lazy = false,
+    config = function()
+      -- load the colorscheme here
+      require("config.colorscheme")
+    end,
   },
   { "nvim-lua/plenary.nvim" },
   {
@@ -601,6 +606,22 @@ return {
       vim.keymap.set("n", "zR", require("ufo").openAllFolds)
       vim.keymap.set("n", "zM", require("ufo").closeAllFolds)
       vim.keymap.set("n", "zr", require("ufo").openFoldsExceptKinds)
+      -- Taken from https://github.com/kevinhwang91/nvim-ufo
+      -- Tell the server the capability of foldingRange,
+      -- Neovim hasn't added foldingRange to default capabilities, users must add it manually
+      local capabilities = vim.lsp.protocol.make_client_capabilities()
+      capabilities.textDocument.foldingRange = {
+          dynamicRegistration = false,
+          lineFoldingOnly = true
+      }
+      local language_servers = require("lspconfig").util.available_servers() -- or list servers manually like {'gopls', 'clangd'}
+      for _, ls in ipairs(language_servers) do
+          require('lspconfig')[ls].setup({
+              capabilities = capabilities
+              -- you can add other fields for setting up lsp server in this table
+          })
+      end
+      require('ufo').setup()
     end,
   },
   {
@@ -784,16 +805,22 @@ return {
       "sindrets/diffview.nvim",
       "nvim-telescope/telescope.nvim",
     },
-    config = function()
-      require("neogit").setup({
-        disable_hint = false,
-        disable_context_hightlighting = false,
-        disable_signs = false,
-        graphstyle = "unicode",
-        remember_settings = true,
-        telescope_sorter = nil,
-      })
-    end,
+    cmd = "Neogit",
+    keys = {
+      { "<Leader>gg", "<cmd>Neogit<CR>", desc = "Neogit" },
+    },
+    opts = {
+      disable_signs = false,
+      disable_context_hightlighting = false,
+      disable_commit_confirmation = false,
+      disable_hint = false,
+      graphstyle = "unicode",
+      remember_settings = true,
+      telescope_sorter = nil,
+      integrations = {
+        diffview = true,
+      },
+    },
   },
   {
     "pwntester/octo.nvim",
