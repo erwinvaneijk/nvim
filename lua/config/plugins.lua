@@ -1,5 +1,5 @@
 return {
-  -- Themes
+  -- themes
   {
     "folke/tokyonight.nvim",
     lazy = true,
@@ -74,34 +74,34 @@ return {
     end,
   },
 
-  -- Treesitter
+  -- treesitter
   {
     "nvim-treesitter/nvim-treesitter",
-    event = "BufReadPre",
+    event = "bufreadpre",
     config = function()
       require("plugins.treesitter")
     end,
     dependencies = {
       "hiphish/rainbow-delimiters.nvim",
-      "JoosepAlviste/nvim-ts-context-commentstring",
+      "joosepalviste/nvim-ts-context-commentstring",
       "nvim-treesitter/nvim-treesitter-textobjects",
-      "RRethy/nvim-treesitter-textsubjects",
+      "rrethy/nvim-treesitter-textsubjects",
     },
   },
 
-  -- Navigating (Telescope/Tree/Refactor)
+  -- navigating (telescope/tree/refactor)
   {
     "nvim-pack/nvim-spectre",
     lazy = true,
     keys = {
       {
-        "<Leader>pr",
-        "<cmd>lua require('spectre').open_visual({select_word=true})<CR>",
+        "<leader>pr",
+        "<cmd>lua require('spectre').open_visual({select_word=true})<cr>",
         desc = "refactor",
       },
       {
-        "<Leader>pr",
-        "<cmd>lua require('spectre').open_visual()<CR>",
+        "<leader>pr",
+        "<cmd>lua require('spectre').open_visual()<cr>",
         mode = "v",
         desc = "refactor",
       },
@@ -123,14 +123,14 @@ return {
   {
     "nvim-tree/nvim-tree.lua",
     cmd = {
-      "NvimTreeOpen",
-      "NvimTreeClose",
-      "NvimTreeToggle",
-      "NvimTreeFindFile",
-      "NvimTreeFindFileToggle",
+      "nvimtreeopen",
+      "nvimtreeclose",
+      "nvimtreetoggle",
+      "nvimtreefindfile",
+      "nvimtreefindfiletoggle",
     },
     keys = {
-      { "<C-e>", "<cmd>lua require('nvim-tree.api').tree.toggle()<CR>", desc = "NvimTree" },
+      { "<c-e>", "<cmd>lua require('nvim-tree.api').tree.toggle()<cr>", desc = "nvimtree" },
     },
     config = function()
       require("plugins.tree")
@@ -142,27 +142,27 @@ return {
     config = true, -- run require("stay-in-place").setup()
   },
   {
-    "ThePrimeagen/refactoring.nvim",
+    "theprimeagen/refactoring.nvim",
     dependencies = {
       "nvim-lua/plenary.nvim",
       "nvim-treesitter/nvim-treesitter",
     },
-    cmd = "Refactor",
+    cmd = "refactor",
     keys = {
-      { "<leader>re", ":Refactor extract ", mode = "x", desc = "Extract function" },
-      { "<leader>rf", ":Refactor extract_to_file ", mode = "x", desc = "Extract function to file" },
-      { "<leader>rv", ":Refactor extract_var ", mode = "x", desc = "Extract variable" },
-      { "<leader>ri", ":Refactor inline_var", mode = { "x", "n" }, desc = "Inline variable" },
-      { "<leader>rI", ":Refactor inline_func", mode = "n", desc = "Inline function" },
-      { "<leader>rb", ":Refactor extract_block", mode = "n", desc = "Extract block" },
-      { "<leader>rf", ":Refactor extract_block_to_file", mode = "n", desc = "Extract block to file" },
+      { "<leader>re", ":refactor extract ", mode = "x", desc = "extract function" },
+      { "<leader>rf", ":refactor extract_to_file ", mode = "x", desc = "extract function to file" },
+      { "<leader>rv", ":refactor extract_var ", mode = "x", desc = "extract variable" },
+      { "<leader>ri", ":refactor inline_var", mode = { "x", "n" }, desc = "inline variable" },
+      { "<leader>ri", ":refactor inline_func", mode = "n", desc = "inline function" },
+      { "<leader>rb", ":refactor extract_block", mode = "n", desc = "extract block" },
+      { "<leader>rf", ":refactor extract_block_to_file", mode = "n", desc = "extract block to file" },
     },
     config = function()
       require("refactoring").setup()
     end,
   },
 
-  -- LSP Base
+  -- lsp base
   {
     "neovim/nvim-lspconfig",
     lazy = false,
@@ -175,17 +175,17 @@ return {
   },
   {
     "williamboman/mason.nvim",
-    cmd = "Mason",
+    cmd = "mason",
     keys = {
-      { "<leader>cm", "<cmd>Mason<cr>", desc = "Mason" },
+      { "<leader>cm", "<cmd>mason<cr>", desc = "mason" },
     },
   },
   -- linter config
   {
     "mfussenegger/nvim-lint",
     event = {
-      "BufReadPre",
-      "BufNewFile",
+      "bufreadpre",
+      "bufnewfile",
     },
     config = function()
       local lint = require("lint")
@@ -199,7 +199,7 @@ return {
 
       local lint_augroup = vim.api.nvim_create_augroup("lint", { clear = true })
 
-      vim.api.nvim_create_autocmd({ "BufEnter", "BufWritePost", "InsertLeave" }, {
+      vim.api.nvim_create_autocmd({ "bufenter", "bufwritepost", "insertleave" }, {
         group = lint_augroup,
         callback = function()
           lint.try_lint()
@@ -208,13 +208,13 @@ return {
 
       vim.keymap.set("n", "<leader>ll", function()
         lint.try_lint()
-      end, { desc = "Trigger linting for current file" })
+      end, { desc = "trigger linting for current file" })
     end,
   },
-  -- Code Formatters
+  -- code formatters
   {
     "stevearc/conform.nvim",
-    event = { "BufReadPre", "BufNewFile" },
+    event = { "bufreadpre", "bufnewfile" },
     config = function()
       local conform = require("conform")
       conform.setup({
@@ -249,13 +249,13 @@ return {
           async = false,
           timeout_ms = 500,
         })
-      end, { desc = "Format file or range (in visual mode)" })
+      end, { desc = "format file or range (in visual mode)" })
     end,
   },
-  -- LSP Cmp
+  -- lsp cmp
   {
     "hrsh7th/nvim-cmp",
-    event = "InsertEnter",
+    event = "insertenter",
     config = function()
       require("plugins.cmp")
     end,
@@ -267,21 +267,21 @@ return {
       "hrsh7th/cmp-cmdline",
       "hrsh7th/cmp-calc",
       "saadparwaiz1/cmp_luasnip",
-      { "L3MON4D3/LuaSnip", dependencies = "rafamadriz/friendly-snippets" },
+      { "l3mon4d3/luasnip", dependencies = "rafamadriz/friendly-snippets" },
       {
-        cond = EcoVim.plugins.ai.tabnine.enabled,
+        cond = ecovim.plugins.ai.tabnine.enabled,
         "tzachar/cmp-tabnine",
         build = "./install.sh",
       },
       {
-        "David-Kunz/cmp-npm",
+        "david-kunz/cmp-npm",
         config = function()
           require("plugins.cmp-npm")
         end,
       },
       {
         "zbirenbaum/copilot-cmp",
-        cond = EcoVim.plugins.ai.copilot.enabled,
+        cond = ecovim.plugins.ai.copilot.enabled,
         config = function()
           require("copilot_cmp").setup()
         end,
@@ -290,11 +290,11 @@ return {
     },
   },
 
-  -- LSP Addons
+  -- lsp addons
   {
     "stevearc/dressing.nvim",
-    event = "VeryLazy",
-    dependencies = "MunifTanjim/nui.nvim",
+    event = "verylazy",
+    dependencies = "muniftanjim/nui.nvim",
     config = function()
       require("plugins.dressing")
     end,
@@ -302,14 +302,14 @@ return {
   { "onsails/lspkind-nvim" },
   {
     "folke/trouble.nvim",
-    cmd = { "TroubleToggle", "Trouble" },
+    cmd = { "troubletoggle", "trouble" },
     config = function()
       require("plugins.trouble")
     end,
   },
   { "nvim-lua/popup.nvim" },
   {
-    "SmiteshP/nvim-navic",
+    "smiteshp/nvim-navic",
     config = function()
       require("plugins.navic")
     end,
@@ -334,17 +334,17 @@ return {
     config = function()
       require("plugins.glance")
     end,
-    cmd = { "Glance" },
+    cmd = { "glance" },
     keys = {
-      { "gd", "<cmd>Glance definitions<CR>", desc = "LSP Definition" },
-      { "gr", "<cmd>Glance references<CR>", desc = "LSP References" },
-      { "gm", "<cmd>Glance implementations<CR>", desc = "LSP Implementations" },
-      { "gy", "<cmd>Glance type_definitions<CR>", desc = "LSP Type Definitions" },
+      { "gd", "<cmd>glance definitions<cr>", desc = "lsp definition" },
+      { "gr", "<cmd>glance references<cr>", desc = "lsp references" },
+      { "gm", "<cmd>glance implementations<cr>", desc = "lsp implementations" },
+      { "gy", "<cmd>glance type_definitions<cr>", desc = "lsp type definitions" },
     },
   },
   {
     "antosha417/nvim-lsp-file-operations",
-    event = "LspAttach",
+    event = "lspattach",
     dependencies = {
       { "nvim-lua/plenary.nvim" },
       { "nvim-tree/nvim-tree.lua" },
@@ -354,14 +354,14 @@ return {
     end,
   },
 
-  -- General
-  { "AndrewRadev/switch.vim", lazy = false },
+  -- general
+  { "andrewradev/switch.vim", lazy = false },
   {
-    "Wansmer/treesj",
+    "wansmer/treesj",
     lazy = true,
-    cmd = { "TSJToggle", "TSJSplit", "TSJJoin" },
+    cmd = { "tsjtoggle", "tsjsplit", "tsjjoin" },
     keys = {
-      { "gJ", "<cmd>TSJToggle<CR>", desc = "Toggle Split/Join" },
+      { "gj", "<cmd>tsjtoggle<cr>", desc = "toggle split/join" },
     },
     config = function()
       require("treesj").setup({
@@ -370,19 +370,19 @@ return {
     end,
   },
   {
-    "numToStr/Comment.nvim",
+    "numtostr/comment.nvim",
     lazy = false,
-    dependencies = "JoosepAlviste/nvim-ts-context-commentstring",
+    dependencies = "joosepalviste/nvim-ts-context-commentstring",
     config = function()
       require("plugins.comment")
     end,
   },
   {
-    "LudoPinelli/comment-box.nvim",
+    "ludopinelli/comment-box.nvim",
     lazy = false,
     keys = {
-      { "<leader>ac", "<cmd>lua require('comment-box').lbox()<CR>", desc = "comment box" },
-      { "<leader>ac", "<cmd>lua require('comment-box').lbox()<CR>", mode = "v", desc = "comment box" },
+      { "<leader>ac", "<cmd>lua require('comment-box').lbox()<cr>", desc = "comment box" },
+      { "<leader>ac", "<cmd>lua require('comment-box').lbox()<cr>", mode = "v", desc = "comment box" },
     },
   },
   {
@@ -393,7 +393,7 @@ return {
       require("plugins.toggleterm")
     end,
     keys = {
-      { "<Leader>at", "<cmd>ToggleTerm direction=float<CR>", desc = "terminal float" },
+      { "<leader>at", "<cmd>toggleterm direction=float<cr>", desc = "terminal float" },
     },
   },
   { "tpope/vim-repeat", lazy = false },
@@ -422,23 +422,23 @@ return {
   {
     "folke/todo-comments.nvim",
     lazy = false,
-    event = "BufEnter",
+    event = "bufenter",
     config = function()
       require("plugins.todo-comments")
     end,
   },
   {
     "folke/zen-mode.nvim",
-    cmd = { "ZenMode" },
+    cmd = { "zenmode" },
     config = function()
       require("plugins.zen")
     end,
-    cond = EcoVim.plugins.zen.enabled,
+    cond = ecovim.plugins.zen.enabled,
   },
   {
     "folke/twilight.nvim",
     config = true,
-    cond = EcoVim.plugins.zen.enabled,
+    cond = ecovim.plugins.zen.enabled,
   },
   {
     "folke/flash.nvim",
@@ -446,16 +446,16 @@ return {
     opts = {},
     -- stylua: ignore
     keys = {
-      { "s", mode = { "n", "x", "o" }, function() require("flash").jump() end, desc = "Flash" },
-      { "S", mode = { "n", "x", "o" }, function() require("flash").treesitter() end, desc = "Flash Treesitter" },
-      { "r", mode = "o", function() require("flash").remote() end, desc = "Remote Flash" },
-      { "R", mode = { "o", "x" }, function() require("flash").treesitter_search() end, desc = "Treesitter Search" },
-      { "<c-s>", mode = { "c" }, function() require("flash").toggle() end, desc = "Toggle Flash Search" },
+      { "s", mode = { "n", "x", "o" }, function() require("flash").jump() end, desc = "flash" },
+      { "s", mode = { "n", "x", "o" }, function() require("flash").treesitter() end, desc = "flash treesitter" },
+      { "r", mode = "o", function() require("flash").remote() end, desc = "remote flash" },
+      { "r", mode = { "o", "x" }, function() require("flash").treesitter_search() end, desc = "treesitter search" },
+      { "<c-s>", mode = { "c" }, function() require("flash").toggle() end, desc = "toggle flash search" },
     },
   },
   {
     "folke/which-key.nvim",
-    event = "VeryLazy",
+    event = "verylazy",
     lazy = true,
     config = function()
       require("plugins.which-key")
@@ -466,7 +466,7 @@ return {
     config = function()
       require("plugins.galaxyline")
     end,
-    event = "VeryLazy",
+    event = "verylazy",
   },
   {
     "echasnovski/mini.bufremove",
@@ -479,7 +479,7 @@ return {
   },
   {
     "akinsho/bufferline.nvim",
-    event = "VeryLazy",
+    event = "verylazy",
     dependencies = {
       "nvim-tree/nvim-web-devicons",
       "echasnovski/mini.bufremove",
@@ -489,52 +489,52 @@ return {
       require("plugins.bufferline")
     end,
     keys = {
-      { "<Leader>1", "<cmd>BufferLineGoToBuffer 1<CR>" },
-      { "<Leader>2", "<cmd>BufferLineGoToBuffer 2<CR>" },
-      { "<Leader>3", "<cmd>BufferLineGoToBuffer 3<CR>" },
-      { "<Leader>4", "<cmd>BufferLineGoToBuffer 4<CR>" },
-      { "<Leader>5", "<cmd>BufferLineGoToBuffer 5<CR>" },
-      { "<Leader>6", "<cmd>BufferLineGoToBuffer 6<CR>" },
-      { "<Leader>7", "<cmd>BufferLineGoToBuffer 7<CR>" },
-      { "<Leader>8", "<cmd>BufferLineGoToBuffer 8<CR>" },
-      { "<Leader>9", "<cmd>BufferLineGoToBuffer 9<CR>" },
-      { "<A-1>", "<cmd>BufferLineGoToBuffer 1<CR>" },
-      { "<A-2>", "<cmd>BufferLineGoToBuffer 2<CR>" },
-      { "<A-3>", "<cmd>BufferLineGoToBuffer 3<CR>" },
-      { "<A-4>", "<cmd>BufferLineGoToBuffer 4<CR>" },
-      { "<A-5>", "<cmd>BufferLineGoToBuffer 5<CR>" },
-      { "<A-6>", "<cmd>BufferLineGoToBuffer 6<CR>" },
-      { "<A-7>", "<cmd>BufferLineGoToBuffer 7<CR>" },
-      { "<A-8>", "<cmd>BufferLineGoToBuffer 8<CR>" },
-      { "<A-9>", "<cmd>BufferLineGoToBuffer 9<CR>" },
-      { "<Leader>bb", "<cmd>BufferLineMovePrev<CR>", desc = "Move back" },
-      { "<Leader>bl", "<cmd>BufferLineCloseLeft<CR>", desc = "Close Left" },
-      { "<Leader>br", "<cmd>BufferLineCloseRight<CR>", desc = "Close Right" },
-      { "<Leader>bn", "<cmd>BufferLineMoveNext<CR>", desc = "Move next" },
-      { "<Leader>bp", "<cmd>BufferLinePick<CR>", desc = "Pick Buffer" },
-      { "<Leader>bP", "<cmd>BufferLineTogglePin<CR>", desc = "Pin/Unpin Buffer" },
-      { "<Leader>bsd", "<cmd>BufferLineSortByDirectory<CR>", desc = "Sort by directory" },
-      { "<Leader>bse", "<cmd>BufferLineSortByExtension<CR>", desc = "Sort by extension" },
-      { "<Leader>bsr", "<cmd>BufferLineSortByRelativeDirectory<CR>", desc = "Sort by relative dir" },
+      { "<leader>1", "<cmd>bufferlinegotobuffer 1<cr>" },
+      { "<leader>2", "<cmd>bufferlinegotobuffer 2<cr>" },
+      { "<leader>3", "<cmd>bufferlinegotobuffer 3<cr>" },
+      { "<leader>4", "<cmd>bufferlinegotobuffer 4<cr>" },
+      { "<leader>5", "<cmd>bufferlinegotobuffer 5<cr>" },
+      { "<leader>6", "<cmd>bufferlinegotobuffer 6<cr>" },
+      { "<leader>7", "<cmd>bufferlinegotobuffer 7<cr>" },
+      { "<leader>8", "<cmd>bufferlinegotobuffer 8<cr>" },
+      { "<leader>9", "<cmd>bufferlinegotobuffer 9<cr>" },
+      { "<a-1>", "<cmd>bufferlinegotobuffer 1<cr>" },
+      { "<a-2>", "<cmd>bufferlinegotobuffer 2<cr>" },
+      { "<a-3>", "<cmd>bufferlinegotobuffer 3<cr>" },
+      { "<a-4>", "<cmd>bufferlinegotobuffer 4<cr>" },
+      { "<a-5>", "<cmd>bufferlinegotobuffer 5<cr>" },
+      { "<a-6>", "<cmd>bufferlinegotobuffer 6<cr>" },
+      { "<a-7>", "<cmd>bufferlinegotobuffer 7<cr>" },
+      { "<a-8>", "<cmd>bufferlinegotobuffer 8<cr>" },
+      { "<a-9>", "<cmd>bufferlinegotobuffer 9<cr>" },
+      { "<leader>bb", "<cmd>bufferlinemoveprev<cr>", desc = "move back" },
+      { "<leader>bl", "<cmd>bufferlinecloseleft<cr>", desc = "close left" },
+      { "<leader>br", "<cmd>bufferlinecloseright<cr>", desc = "close right" },
+      { "<leader>bn", "<cmd>bufferlinemovenext<cr>", desc = "move next" },
+      { "<leader>bp", "<cmd>bufferlinepick<cr>", desc = "pick buffer" },
+      { "<leader>bp", "<cmd>bufferlinetogglepin<cr>", desc = "pin/unpin buffer" },
+      { "<leader>bsd", "<cmd>bufferlinesortbydirectory<cr>", desc = "sort by directory" },
+      { "<leader>bse", "<cmd>bufferlinesortbyextension<cr>", desc = "sort by extension" },
+      { "<leader>bsr", "<cmd>bufferlinesortbyrelativedirectory<cr>", desc = "sort by relative dir" },
     },
   },
   {
     "rcarriga/nvim-notify",
-    event = "VeryLazy",
+    event = "verylazy",
     config = function()
       require("plugins.notify")
     end,
   },
   {
     "j-hui/fidget.nvim",
-    event = "VeryLazy",
+    event = "verylazy",
     config = function()
       require("plugins.fidget")
     end,
   },
   {
     "vuki656/package-info.nvim",
-    event = "BufEnter package.json",
+    event = "bufenter package.json",
     config = function()
       require("plugins.package-info")
     end,
@@ -549,7 +549,7 @@ return {
   },
   {
     "ahmedkhalf/project.nvim",
-    event = "BufWinEnter",
+    event = "bufwinenter",
     config = function()
       require("project_nvim").setup({
         -- configuration goes here.
@@ -561,7 +561,7 @@ return {
           ".hg",
           ".bzr",
           ".svn",
-          "Makefile",
+          "makefile",
           "cargo.toml",
           "package.json",
           "!.git/worktrees",
@@ -573,23 +573,23 @@ return {
     end,
   },
   {
-    "Shatur/neovim-session-manager",
+    "shatur/neovim-session-manager",
     lazy = false,
     config = function()
       require("plugins.session-manager")
     end,
     keys = {
-      { "<Leader>/sc", "<cmd>SessionManager load_session<CR>", desc = "choose session" },
-      { "<Leader>/sr", "<cmd>SessionManager delete_session<CR>", desc = "remove session" },
-      { "<Leader>/sd", "<cmd>SessionManager load_current_dir_session<CR>", desc = "load current dir session" },
-      { "<Leader>/sl", "<cmd>SessionManager load_last_session<CR>", desc = "load last session" },
-      { "<Leader>/ss", "<cmd>SessionManager save_current_session<CR>", desc = "save session" },
+      { "<leader>/sc", "<cmd>sessionmanager load_session<cr>", desc = "choose session" },
+      { "<leader>/sr", "<cmd>sessionmanager delete_session<cr>", desc = "remove session" },
+      { "<leader>/sd", "<cmd>sessionmanager load_current_dir_session<cr>", desc = "load current dir session" },
+      { "<leader>/sl", "<cmd>sessionmanager load_last_session<cr>", desc = "load last session" },
+      { "<leader>/ss", "<cmd>sessionmanager save_current_session<cr>", desc = "save session" },
     },
   },
   {
     "kylechui/nvim-surround",
-    version = "*", -- Use for stability; omit to use `main` branch for the latest features
-    event = "VeryLazy",
+    version = "*", -- use for stability; omit to use `main` branch for the latest features
+    event = "verylazy",
     config = true,
   },
   {
@@ -603,16 +603,16 @@ return {
     "kevinhwang91/nvim-ufo",
     dependencies = "kevinhwang91/promise-async",
     config = function()
-      vim.keymap.set("n", "zR", require("ufo").openAllFolds)
-      vim.keymap.set("n", "zM", require("ufo").closeAllFolds)
-      vim.keymap.set("n", "zr", require("ufo").openFoldsExceptKinds)
-      -- Taken from https://github.com/kevinhwang91/nvim-ufo
-      -- Tell the server the capability of foldingRange,
-      -- Neovim hasn't added foldingRange to default capabilities, users must add it manually
+      vim.keymap.set("n", "zr", require("ufo").openallfolds)
+      vim.keymap.set("n", "zm", require("ufo").closeallfolds)
+      vim.keymap.set("n", "zr", require("ufo").openfoldsexceptkinds)
+      -- taken from https://github.com/kevinhwang91/nvim-ufo
+      -- tell the server the capability of foldingrange,
+      -- neovim hasn't added foldingrange to default capabilities, users must add it manually
       local capabilities = vim.lsp.protocol.make_client_capabilities()
-      capabilities.textDocument.foldingRange = {
-          dynamicRegistration = false,
-          lineFoldingOnly = true
+      capabilities.textdocument.foldingrange = {
+          dynamicregistration = false,
+          linefoldingonly = true
       }
       local language_servers = require("lspconfig").util.available_servers() -- or list servers manually like {'gopls', 'clangd'}
       for _, ls in ipairs(language_servers) do
@@ -642,7 +642,7 @@ return {
   },
   {
     "rareitems/printer.nvim",
-    event = "BufEnter",
+    event = "bufenter",
     ft = {
       "lua",
       "javascript",
@@ -656,7 +656,7 @@ return {
   },
   {
     "lukas-reineke/indent-blankline.nvim",
-    event = "BufReadPre",
+    event = "bufreadpre",
     main = "ibl",
     config = function()
       require("plugins.indent")
@@ -664,7 +664,7 @@ return {
   },
   {
     "folke/noice.nvim",
-    cond = EcoVim.plugins.experimental_noice.enabled,
+    cond = ecovim.plugins.experimental_noice.enabled,
     lazy = false,
     config = function()
       require("plugins.noice")
@@ -672,39 +672,39 @@ return {
   },
   {
     "chrisgrieser/nvim-spider",
-    cond = EcoVim.plugins.jump_by_subwords.enabled,
+    cond = ecovim.plugins.jump_by_subwords.enabled,
     lazy = true,
     keys = { "w", "e", "b", "ge" },
     config = function()
-      vim.keymap.set({ "n", "o", "x" }, "W", "w", { desc = "Normal w" })
-      vim.keymap.set({ "n", "o", "x" }, "w", "<cmd>lua require('spider').motion('w')<CR>", { desc = "Spider-w" })
-      vim.keymap.set({ "n", "o", "x" }, "e", "<cmd>lua require('spider').motion('e')<CR>", { desc = "Spider-e" })
-      vim.keymap.set({ "n", "o", "x" }, "b", "<cmd>lua require('spider').motion('b')<CR>", { desc = "Spider-b" })
-      vim.keymap.set({ "n", "o", "x" }, "ge", "<cmd>lua require('spider').motion('ge')<CR>", { desc = "Spider-ge" })
+      vim.keymap.set({ "n", "o", "x" }, "w", "w", { desc = "normal w" })
+      vim.keymap.set({ "n", "o", "x" }, "w", "<cmd>lua require('spider').motion('w')<cr>", { desc = "spider-w" })
+      vim.keymap.set({ "n", "o", "x" }, "e", "<cmd>lua require('spider').motion('e')<cr>", { desc = "spider-e" })
+      vim.keymap.set({ "n", "o", "x" }, "b", "<cmd>lua require('spider').motion('b')<cr>", { desc = "spider-b" })
+      vim.keymap.set({ "n", "o", "x" }, "ge", "<cmd>lua require('spider').motion('ge')<cr>", { desc = "spider-ge" })
     end,
   },
 
-  -- Snippets & Language & Syntax
+  -- snippets & language & syntax
   {
     "windwp/nvim-autopairs",
-    event = "InsertEnter",
+    event = "insertenter",
     config = function()
       require("plugins.autopairs")
     end,
   },
   {
-    "NvChad/nvim-colorizer.lua",
+    "nvchad/nvim-colorizer.lua",
     config = function()
       require("plugins.colorizer")
     end,
   },
 
-  -- AI
+  -- ai
   {
     "jcdickinson/codeium.nvim",
-    cond = EcoVim.plugins.ai.codeium.enabled,
-    event = "InsertEnter",
-    cmd = "Codeium",
+    cond = ecovim.plugins.ai.codeium.enabled,
+    event = "insertenter",
+    cmd = "codeium",
     dependencies = {
       "nvim-lua/plenary.nvim",
       "hrsh7th/nvim-cmp",
@@ -713,30 +713,30 @@ return {
   },
   {
     "zbirenbaum/copilot.lua",
-    cond = EcoVim.plugins.ai.copilot.enabled,
-    event = "InsertEnter",
+    cond = ecovim.plugins.ai.copilot.enabled,
+    event = "insertenter",
     config = function()
       require("plugins.copilot")
     end,
   },
   {
-    "Bryley/neoai.nvim",
-    cond = EcoVim.plugins.ai.chatgpt.enabled,
+    "bryley/neoai.nvim",
+    cond = ecovim.plugins.ai.chatgpt.enabled,
     dependencies = {
-      "MunifTanjim/nui.nvim",
+      "muniftanjim/nui.nvim",
     },
     cmd = {
-      "NeoAI",
-      "NeoAIOpen",
-      "NeoAIClose",
-      "NeoAIToggle",
-      "NeoAIContext",
-      "NeoAIContextOpen",
-      "NeoAIContextClose",
-      "NeoAIInject",
-      "NeoAIInjectCode",
-      "NeoAIInjectContext",
-      "NeoAIInjectContextCode",
+      "neoai",
+      "neoaiopen",
+      "neoaiclose",
+      "neoaitoggle",
+      "neoaicontext",
+      "neoaicontextopen",
+      "neoaicontextclose",
+      "neoaiinject",
+      "neoaiinjectcode",
+      "neoaiinjectcontext",
+      "neoaiinjectcontextcode",
     },
     keys = {
       { "<leader>as", desc = "summarize text" },
@@ -745,36 +745,36 @@ return {
     config = true,
   },
 
-  -- Git
+  -- git
   {
     "lewis6991/gitsigns.nvim",
-    event = "BufRead",
+    event = "bufread",
     dependencies = { "nvim-lua/plenary.nvim" },
     config = function()
       require("plugins.git.signs")
     end,
     keys = {
-      { "<Leader>ghd", desc = "diff hunk" },
-      { "<Leader>ghp", desc = "preview" },
-      { "<Leader>ghR", desc = "reset buffer" },
-      { "<Leader>ghr", desc = "reset hunk" },
-      { "<Leader>ghs", desc = "stage hunk" },
-      { "<Leader>ghS", desc = "stage buffer" },
-      { "<Leader>ght", desc = "toggle deleted" },
-      { "<Leader>ghu", desc = "undo stage" },
+      { "<leader>ghd", desc = "diff hunk" },
+      { "<leader>ghp", desc = "preview" },
+      { "<leader>ghr", desc = "reset buffer" },
+      { "<leader>ghr", desc = "reset hunk" },
+      { "<leader>ghs", desc = "stage hunk" },
+      { "<leader>ghs", desc = "stage buffer" },
+      { "<leader>ght", desc = "toggle deleted" },
+      { "<leader>ghu", desc = "undo stage" },
     },
   },
   {
     "sindrets/diffview.nvim",
     lazy = true,
     enabled = true,
-    event = "BufRead",
+    event = "bufread",
     config = function()
       require("plugins.git.diffview")
     end,
     keys = {
-      { "<Leader>gd", "<cmd>lua require('plugins.git.diffview').toggle_file_history()<CR>", desc = "diff file" },
-      { "<Leader>gS", "<cmd>lua require('plugins.git.diffview').toggle_status()<CR>", desc = "status" },
+      { "<leader>gd", "<cmd>lua require('plugins.git.diffview').toggle_file_history()<cr>", desc = "diff file" },
+      { "<leader>gs", "<cmd>lua require('plugins.git.diffview').toggle_status()<cr>", desc = "status" },
     },
   },
   {
@@ -784,30 +784,30 @@ return {
       require("plugins.git.conflict")
     end,
     keys = {
-      { "<Leader>gcb", "<cmd>GitConflictChooseBoth<CR>", desc = "choose both" },
-      { "<Leader>gcn", "<cmd>GitConflictNextConflict<CR>", desc = "move to next conflict" },
-      { "<Leader>gcc", "<cmd>GitConflictChooseOurs<CR>", desc = "choose current" },
-      { "<Leader>gcp", "<cmd>GitConflictPrevConflict<CR>", desc = "move to prev conflict" },
-      { "<Leader>gci", "<cmd>GitConflictChooseTheirs<CR>", desc = "choose incoming" },
+      { "<leader>gcb", "<cmd>gitconflictchooseboth<cr>", desc = "choose both" },
+      { "<leader>gcn", "<cmd>gitconflictnextconflict<cr>", desc = "move to next conflict" },
+      { "<leader>gcc", "<cmd>gitconflictchooseours<cr>", desc = "choose current" },
+      { "<leader>gcp", "<cmd>gitconflictprevconflict<cr>", desc = "move to prev conflict" },
+      { "<leader>gci", "<cmd>gitconflictchoosetheirs<cr>", desc = "choose incoming" },
     },
   },
   {
-    "ThePrimeagen/git-worktree.nvim",
+    "theprimeagen/git-worktree.nvim",
     lazy = false,
     config = function()
       require("plugins.git.worktree")
     end,
   },
   {
-    "NeogitOrg/neogit",
+    "neogitorg/neogit",
     dependencies = {
       "nvim-lua/plenary.nvim",
       "sindrets/diffview.nvim",
       "nvim-telescope/telescope.nvim",
     },
-    cmd = "Neogit",
+    cmd = "neogit",
     keys = {
-      { "<Leader>gg", "<cmd>Neogit<CR>", desc = "Neogit" },
+      { "<leader>gg", "<cmd>neogit<cr>", desc = "neogit" },
     },
     opts = {
       disable_signs = false,
@@ -830,20 +830,20 @@ return {
       "nvim-tree/nvim-web-devicons",
     },
     cmd = {
-      "Octo",
+      "octo",
     },
     config = function()
       require("plugins.git.octo")
     end,
   },
 
-  -- Testing
+  -- testing
   {
     "rcarriga/neotest",
     dependencies = {
       "nvim-lua/plenary.nvim",
       "nvim-treesitter/nvim-treesitter",
-      "antoinemadec/FixCursorHold.nvim",
+      "antoinemadec/fixcursorhold.nvim",
       "haydenmeade/neotest-jest",
     },
     config = function()
@@ -854,44 +854,44 @@ return {
     "andythigpen/nvim-coverage",
     dependencies = "nvim-lua/plenary.nvim",
     cmd = {
-      "Coverage",
-      "CoverageSummary",
-      "CoverageLoad",
-      "CoverageShow",
-      "CoverageHide",
-      "CoverageToggle",
-      "CoverageClear",
+      "coverage",
+      "coveragesummary",
+      "coverageload",
+      "coverageshow",
+      "coveragehide",
+      "coveragetoggle",
+      "coverageclear",
     },
     config = function()
       require("coverage").setup()
     end,
   },
 
-  -- DAP
+  -- dap
   {
     "mfussenegger/nvim-dap",
     config = function()
       require("plugins.dap")
     end,
     keys = {
-      "<Leader>da",
-      "<Leader>db",
-      "<Leader>dc",
-      "<Leader>dd",
-      "<Leader>dh",
-      "<Leader>di",
-      "<Leader>do",
-      "<Leader>dO",
-      "<Leader>dt",
+      "<leader>da",
+      "<leader>db",
+      "<leader>dc",
+      "<leader>dd",
+      "<leader>dh",
+      "<leader>di",
+      "<leader>do",
+      "<leader>do",
+      "<leader>dt",
     },
     dependencies = {
-      "theHamsta/nvim-dap-virtual-text",
+      "thehamsta/nvim-dap-virtual-text",
       "rcarriga/nvim-dap-ui",
       "mxsdev/nvim-dap-vscode-js",
     },
   },
   {
-    "LiadOz/nvim-dap-repl-highlights",
+    "liadoz/nvim-dap-repl-highlights",
     config = true,
     dependencies = {
       "mfussenegger/nvim-dap",
@@ -899,7 +899,7 @@ return {
     },
     build = function()
       if not require("nvim-treesitter.parsers").has_parser("dap_repl") then
-        vim.cmd(":TSInstall dap_repl")
+        vim.cmd(":tsinstall dap_repl")
       end
     end,
   },
@@ -910,15 +910,15 @@ return {
       require("virt-column").setup {}
       require("virt-column").overwrite {
         virtcolumn = "+1",
-        hightlight = "VirtColumn",
+        hightlight = "virtcolumn",
         exclude = {
           filetypes = {
             "lspinfo",
             "packer",
             "checkhealth",
             "man",
-            "TelescopePrompt",
-            "TelesecopeResults",
+            "telescopeprompt",
+            "telesecoperesults",
           },
         },
       }
@@ -927,18 +927,18 @@ return {
   {
     "chrisgrieser/nvim-early-retirement",
     opts = {
-      retirementAgeMins = 20,
+      retirementagemins = 20,
     },
-    event = "VeryLazy",
+    event = "verylazy",
   },
   {
-    "TobinPalmer/Tip.nvim",
-    event = "VimEnter",
+    "tobinpalmer/tip.nvim",
+    event = "vimenter",
     init = function()
-      -- Default config
-      -- @type Tip.config
+      -- default config
+      -- @type tip.config
       require("tip").setup({
-        title = "Tip!",
+        title = "tip!",
         url = "https://vtip.43z.one",
       })
     end,
@@ -946,9 +946,9 @@ return {
   {
     "hedyhli/outline.nvim",
     lazy = true,
-    cmd = { "Outline", "OutlineOpen" },
+    cmd = { "outline", "outlineopen" },
     keys = {
-      { "<leader>o", "<cmd>Outline<CR>", desc = "Toggle the outline view" },
+      { "<leader>o", "<cmd>outline<cr>", desc = "toggle the outline view" },
     },
     opts = {
       -- when we need extra options.
@@ -957,7 +957,7 @@ return {
   },
   {
     "mrcjkb/rustaceanvim",
-    version = "^4", -- Recommended in the README
+    version = "^4", -- recommended in the readme
     dependencies = {
       "nvim-lua/plenary.nvim",
       "mfussenegger/nvim-dap",
@@ -971,10 +971,10 @@ return {
     "wakatime/vim-wakatime",
     lazy = false,
     config = function()
-      -- I think I need to do something, but this is the most
-      -- innocent thing I can come up with. It also makes it easy
-      -- to enable debugging if I want that.
-      vim.cmd(":WakaTimeDebugDisable")
+      -- i think i need to do something, but this is the most
+      -- innocent thing i can come up with. it also makes it easy
+      -- to enable debugging if i want that.
+      vim.cmd(":wakatimedebugdisable")
     end,
     opts = {},
   },
