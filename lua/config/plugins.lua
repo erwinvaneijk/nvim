@@ -123,11 +123,11 @@ return {
   {
     "nvim-tree/nvim-tree.lua",
     cmd = {
-      "nvimtreeopen",
-      "nvimtreeclose",
-      "nvimtreetoggle",
-      "nvimtreefindfile",
-      "nvimtreefindfiletoggle",
+      "NvimTreeOpen",
+      "NvimTreeClose",
+      "NvimTreeToggle",
+      "NvimTreeFindFile",
+      "NvimTreeFindFileToggle",
     },
     keys = {
       { "<c-e>", "<cmd>lua require('nvim-tree.api').tree.toggle()<cr>", desc = "nvimtree" },
@@ -147,15 +147,15 @@ return {
       "nvim-lua/plenary.nvim",
       "nvim-treesitter/nvim-treesitter",
     },
-    cmd = "refactor",
+    cmd = "Refactor",
     keys = {
-      { "<leader>re", ":refactor extract ", mode = "x", desc = "extract function" },
-      { "<leader>rf", ":refactor extract_to_file ", mode = "x", desc = "extract function to file" },
-      { "<leader>rv", ":refactor extract_var ", mode = "x", desc = "extract variable" },
-      { "<leader>ri", ":refactor inline_var", mode = { "x", "n" }, desc = "inline variable" },
-      { "<leader>ri", ":refactor inline_func", mode = "n", desc = "inline function" },
-      { "<leader>rb", ":refactor extract_block", mode = "n", desc = "extract block" },
-      { "<leader>rf", ":refactor extract_block_to_file", mode = "n", desc = "extract block to file" },
+      { "<leader>re", ":Refactor extract ", mode = "x", desc = "extract function" },
+      { "<leader>rf", ":Refactor extract_to_file ", mode = "x", desc = "extract function to file" },
+      { "<leader>rv", ":Refactor extract_var ", mode = "x", desc = "extract variable" },
+      { "<leader>ri", ":Refactor inline_var", mode = { "x", "n" }, desc = "inline variable" },
+      { "<leader>ri", ":Refactor inline_func", mode = "n", desc = "inline function" },
+      { "<leader>rb", ":Refactor extract_block", mode = "n", desc = "extract block" },
+      { "<leader>rf", ":Refactor extract_block_to_file", mode = "n", desc = "extract block to file" },
     },
     config = function()
       require("refactoring").setup()
@@ -175,9 +175,9 @@ return {
   },
   {
     "williamboman/mason.nvim",
-    cmd = "mason",
+    cmd = "Mason",
     keys = {
-      { "<leader>cm", "<cmd>mason<cr>", desc = "mason" },
+      { "<leader>cm", "<cmd>Mason<cr>", desc = "mason" },
     },
   },
   -- linter config
@@ -269,7 +269,7 @@ return {
       "saadparwaiz1/cmp_luasnip",
       { "l3mon4d3/luasnip", dependencies = "rafamadriz/friendly-snippets" },
       {
-        cond = ecovim.plugins.ai.tabnine.enabled,
+        cond = EcoVim.plugins.ai.tabnine.enabled,
         "tzachar/cmp-tabnine",
         build = "./install.sh",
       },
@@ -281,7 +281,7 @@ return {
       },
       {
         "zbirenbaum/copilot-cmp",
-        cond = ecovim.plugins.ai.copilot.enabled,
+        cond = EcoVim.plugins.ai.copilot.enabled,
         config = function()
           require("copilot_cmp").setup()
         end,
@@ -293,7 +293,7 @@ return {
   -- lsp addons
   {
     "stevearc/dressing.nvim",
-    event = "verylazy",
+    event = "VeryLazy",
     dependencies = "muniftanjim/nui.nvim",
     config = function()
       require("plugins.dressing")
@@ -302,7 +302,7 @@ return {
   { "onsails/lspkind-nvim" },
   {
     "folke/trouble.nvim",
-    cmd = { "troubletoggle", "trouble" },
+    cmd = { "TroubleToggle", "Trouble" },
     config = function()
       require("plugins.trouble")
     end,
@@ -334,12 +334,12 @@ return {
     config = function()
       require("plugins.glance")
     end,
-    cmd = { "glance" },
+    cmd = { "Glance" },
     keys = {
-      { "gd", "<cmd>glance definitions<cr>", desc = "lsp definition" },
-      { "gr", "<cmd>glance references<cr>", desc = "lsp references" },
-      { "gm", "<cmd>glance implementations<cr>", desc = "lsp implementations" },
-      { "gy", "<cmd>glance type_definitions<cr>", desc = "lsp type definitions" },
+      { "gd", "<cmd>Glance definitions<cr>", desc = "lsp definition" },
+      { "gr", "<cmd>Glance references<cr>", desc = "lsp references" },
+      { "gm", "<cmd>Glance implementations<cr>", desc = "lsp implementations" },
+      { "gy", "<cmd>Glance type_definitions<cr>", desc = "lsp type definitions" },
     },
   },
   {
@@ -358,8 +358,9 @@ return {
   { "andrewradev/switch.vim", lazy = false },
   {
     "wansmer/treesj",
+    dependencies = { 'nvim-treesitter/nvim-treesitter'},
     lazy = true,
-    cmd = { "tsjtoggle", "tsjsplit", "tsjjoin" },
+    cmd = { "TSJToggle", "TSJSplit", "TSJJoin" },
     keys = {
       { "gj", "<cmd>tsjtoggle<cr>", desc = "toggle split/join" },
     },
@@ -429,16 +430,16 @@ return {
   },
   {
     "folke/zen-mode.nvim",
-    cmd = { "zenmode" },
+    cmd = { "ZenMode" },
     config = function()
       require("plugins.zen")
     end,
-    cond = ecovim.plugins.zen.enabled,
+    cond = EcoVim.plugins.zen.enabled,
   },
   {
     "folke/twilight.nvim",
     config = true,
-    cond = ecovim.plugins.zen.enabled,
+    cond = EcoVim.plugins.zen.enabled,
   },
   {
     "folke/flash.nvim",
@@ -455,7 +456,7 @@ return {
   },
   {
     "folke/which-key.nvim",
-    event = "verylazy",
+    event = "VeryLazy",
     lazy = true,
     config = function()
       require("plugins.which-key")
@@ -466,7 +467,7 @@ return {
     config = function()
       require("plugins.galaxyline")
     end,
-    event = "verylazy",
+    event = "VeryLazy",
   },
   {
     "echasnovski/mini.bufremove",
@@ -479,7 +480,7 @@ return {
   },
   {
     "akinsho/bufferline.nvim",
-    event = "verylazy",
+    event = "VeryLazy",
     dependencies = {
       "nvim-tree/nvim-web-devicons",
       "echasnovski/mini.bufremove",
@@ -520,14 +521,14 @@ return {
   },
   {
     "rcarriga/nvim-notify",
-    event = "verylazy",
+    event = "VeryLazy",
     config = function()
       require("plugins.notify")
     end,
   },
   {
     "j-hui/fidget.nvim",
-    event = "verylazy",
+    event = "VeryLazy",
     config = function()
       require("plugins.fidget")
     end,
@@ -589,7 +590,7 @@ return {
   {
     "kylechui/nvim-surround",
     version = "*", -- use for stability; omit to use `main` branch for the latest features
-    event = "verylazy",
+    event = "VeryLazy",
     config = true,
   },
   {
@@ -603,16 +604,16 @@ return {
     "kevinhwang91/nvim-ufo",
     dependencies = "kevinhwang91/promise-async",
     config = function()
-      vim.keymap.set("n", "zr", require("ufo").openallfolds)
-      vim.keymap.set("n", "zm", require("ufo").closeallfolds)
-      vim.keymap.set("n", "zr", require("ufo").openfoldsexceptkinds)
+      vim.keymap.set("n", "zr", require("ufo").openAllFolds)
+      vim.keymap.set("n", "zm", require("ufo").closeAllFolds)
+      vim.keymap.set("n", "zr", require("ufo").openFoldsExceptKinds)
       -- taken from https://github.com/kevinhwang91/nvim-ufo
       -- tell the server the capability of foldingrange,
       -- neovim hasn't added foldingrange to default capabilities, users must add it manually
       local capabilities = vim.lsp.protocol.make_client_capabilities()
-      capabilities.textdocument.foldingrange = {
-          dynamicregistration = false,
-          linefoldingonly = true
+      capabilities.textDocument.foldingRange = {
+          dynamicRegistration = false,
+          lineFoldingOnly = true
       }
       local language_servers = require("lspconfig").util.available_servers() -- or list servers manually like {'gopls', 'clangd'}
       for _, ls in ipairs(language_servers) do
@@ -664,7 +665,7 @@ return {
   },
   {
     "folke/noice.nvim",
-    cond = ecovim.plugins.experimental_noice.enabled,
+    cond = EcoVim.plugins.experimental_noice.enabled,
     lazy = false,
     config = function()
       require("plugins.noice")
@@ -672,7 +673,7 @@ return {
   },
   {
     "chrisgrieser/nvim-spider",
-    cond = ecovim.plugins.jump_by_subwords.enabled,
+    cond = EcoVim.plugins.jump_by_subwords.enabled,
     lazy = true,
     keys = { "w", "e", "b", "ge" },
     config = function()
@@ -702,7 +703,7 @@ return {
   -- ai
   {
     "jcdickinson/codeium.nvim",
-    cond = ecovim.plugins.ai.codeium.enabled,
+    cond = EcoVim.plugins.ai.codeium.enabled,
     event = "insertenter",
     cmd = "codeium",
     dependencies = {
@@ -713,7 +714,7 @@ return {
   },
   {
     "zbirenbaum/copilot.lua",
-    cond = ecovim.plugins.ai.copilot.enabled,
+    cond = EcoVim.plugins.ai.copilot.enabled,
     event = "insertenter",
     config = function()
       require("plugins.copilot")
@@ -721,7 +722,7 @@ return {
   },
   {
     "bryley/neoai.nvim",
-    cond = ecovim.plugins.ai.chatgpt.enabled,
+    cond = EcoVim.plugins.ai.chatgpt.enabled,
     dependencies = {
       "muniftanjim/nui.nvim",
     },
@@ -805,9 +806,9 @@ return {
       "sindrets/diffview.nvim",
       "nvim-telescope/telescope.nvim",
     },
-    cmd = "neogit",
+    cmd = "Neogit",
     keys = {
-      { "<leader>gg", "<cmd>neogit<cr>", desc = "neogit" },
+      { "<leader>gg", "<cmd>Neogit<cr>", desc = "Neogit" },
     },
     opts = {
       disable_signs = false,
@@ -830,7 +831,7 @@ return {
       "nvim-tree/nvim-web-devicons",
     },
     cmd = {
-      "octo",
+      "Octo",
     },
     config = function()
       require("plugins.git.octo")
@@ -854,13 +855,13 @@ return {
     "andythigpen/nvim-coverage",
     dependencies = "nvim-lua/plenary.nvim",
     cmd = {
-      "coverage",
-      "coveragesummary",
-      "coverageload",
-      "coverageshow",
-      "coveragehide",
-      "coveragetoggle",
-      "coverageclear",
+      "Coverage",
+      "CoverageSummary",
+      "CoverageLoad",
+      "CoverageShow",
+      "CoverageHide",
+      "CoverageToggle",
+      "CoverageClear",
     },
     config = function()
       require("coverage").setup()
@@ -929,7 +930,7 @@ return {
     opts = {
       retirementagemins = 20,
     },
-    event = "verylazy",
+    event = "VeryLazy",
   },
   {
     "tobinpalmer/tip.nvim",
@@ -946,9 +947,9 @@ return {
   {
     "hedyhli/outline.nvim",
     lazy = true,
-    cmd = { "outline", "outlineopen" },
+    cmd = { "Outline", "OutlineOpen" },
     keys = {
-      { "<leader>o", "<cmd>outline<cr>", desc = "toggle the outline view" },
+      { "<leader>o", "<cmd>Outline<cr>", desc = "toggle the outline view" },
     },
     opts = {
       -- when we need extra options.
@@ -974,7 +975,7 @@ return {
       -- i think i need to do something, but this is the most
       -- innocent thing i can come up with. it also makes it easy
       -- to enable debugging if i want that.
-      vim.cmd(":wakatimedebugdisable")
+      vim.cmd(":WakaTimeDebugDisable")
     end,
     opts = {},
   },
