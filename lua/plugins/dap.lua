@@ -115,9 +115,20 @@ vim.g.dap_virtual_text = true
 -- ╭──────────────────────────────────────────────────────────╮
 -- │ Icons                                                    │
 -- ╰──────────────────────────────────────────────────────────╯
-vim.fn.sign_define("DapBreakpoint", { text = "🟥", texthl = "", linehl = "", numhl = "" })
-vim.fn.sign_define("DapStopped", { text = "⭐️", texthl = "", linehl = "", numhl = "" })
+--vim.fn.sign_define("DapBreakpoint", { text = "🟥", texthl = "", linehl = "", numhl = "" })
+--vim.fn.sign_define("DapStopped", { text = "⭐️", texthl = "", linehl = "", numhl = "" })
+--vim.diagnostic.config("DapBreakpoint", { text = "🟥", texthl = "", linehl = "", numhl = "" })
+--vim.diagnostic.config("DapStopped", { text = "⭐️", texthl = "", linehl = "", numhl = "" })
 
+vim.highlight.create('DapBreakpoint', { ctermbg=0, guifg='#993939', guibg='#31353f' }, false)
+vim.highlight.create('DapLogPoint', { ctermbg=0, guifg='#61afef', guibg='#31353f' }, false)
+vim.highlight.create('DapStopped', { ctermbg=0, guifg='#98c379', guibg='#31353f' }, false)
+
+vim.fn.sign_define('DapBreakpoint', { text="🟥", texthl='DapBreakpoint', linehl='DapBreakpoint', numhl='DapBreakpoint' })
+vim.fn.sign_define('DapBreakpointCondition', { text='ﳁ', texthl='DapBreakpoint', linehl='DapBreakpoint', numhl='DapBreakpoint' })
+vim.fn.sign_define('DapBreakpointRejected', { text='', texthl='DapBreakpoint', linehl='DapBreakpoint', numhl= 'DapBreakpoint' })
+vim.fn.sign_define('DapLogPoint', { text='', texthl='DapLogPoint', linehl='DapLogPoint', numhl= 'DapLogPoint' })
+vim.fn.sign_define('DapStopped', { text='', texthl='DapStopped', linehl='DapStopped', numhl= 'DapStopped' })
 -- ╭──────────────────────────────────────────────────────────╮
 -- │ Keybindings                                              │
 -- ╰──────────────────────────────────────────────────────────╯

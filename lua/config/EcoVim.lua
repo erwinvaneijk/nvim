@@ -9,8 +9,9 @@
 local icons = require("utils.icons")
 
 EcoVim = {
-  --colorscheme = "tokyonight",
-  --colorscheme = "onedark_dark",
+  -- colorscheme = "tokyonight-storm",
+  -- colorscheme = "onedark_dark",
+  colorscheme = "onedark_vivid",
   -- colorscheme = "selenized",
   -- colorscheme = "modus_vivendi",     -- the dark theme.
   -- colorscheme = "palenight",
@@ -18,7 +19,7 @@ EcoVim = {
   -- colorscheme = "gruvbox",
   -- colorscheme = "lackluster",
   -- colorscheme = "lackluster-night",
-  colorscheme = "gruber-darker",
+  -- colorscheme = "gruber-darker",
   -- colorscheme = "modus_operandi", -- the light theme.
   ui = {
     float = {

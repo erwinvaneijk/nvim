@@ -17,8 +17,12 @@ return {
   },
   {
     "olimorris/onedarkpro.nvim",
-    lazy = true,
-    priority = 900,
+    lazy = false,
+    priority = 1000,
+    config = function()
+      -- load the colorscheme here
+      require("config.colorscheme")
+    end,
   },
   {
     "oxfist/night-owl.nvim",
@@ -52,12 +56,8 @@ return {
   },
   {
     "blazkowolf/gruber-darker.nvim",
-    priority = 1000,
-    lazy = false,
-    config = function()
-      -- load the colorscheme here
-      require("config.colorscheme")
-    end,
+    priority = 900,
+    lazy = true,
   },
   { "nvim-lua/plenary.nvim" },
   {
@@ -639,34 +639,20 @@ return {
       require('ufo').setup()
     end,
   },
-  {
-    "echasnovski/mini.align",
-    lazy = false,
-    version = "*",
-    config = function()
-      require("mini.align").setup()
-    end,
-  },
+  --{
+  --  "echasnovski/mini.align",
+  --  lazy = false,
+  --  version = "*",
+  --  config = function()
+  --    require("mini.align").setup()
+  --  end,
+  --},
   {
     "echasnovski/mini.ai",
     lazy = false,
     version = "*",
     config = function()
       require("mini.ai").setup()
-    end,
-  },
-  {
-    "rareitems/printer.nvim",
-    event = "bufenter",
-    ft = {
-      "lua",
-      "javascript",
-      "typescript",
-      "javascriptreact",
-      "typescriptreact",
-    },
-    config = function()
-      require("plugins.printer")
     end,
   },
   {
