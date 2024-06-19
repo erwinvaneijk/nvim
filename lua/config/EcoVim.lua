@@ -9,9 +9,9 @@
 local icons = require("utils.icons")
 
 EcoVim = {
-  -- colorscheme = "tokyonight-storm",
+  colorscheme = "tokyonight-moon",
   -- colorscheme = "onedark_dark",
-  colorscheme = "onedark_vivid",
+  -- colorscheme = "onedark_vivid",
   -- colorscheme = "selenized",
   -- colorscheme = "modus_vivendi",     -- the dark theme.
   -- colorscheme = "palenight",

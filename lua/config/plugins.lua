@@ -2,8 +2,12 @@ return {
   -- themes
   {
     "folke/tokyonight.nvim",
-    lazy = true,
-    priority = 900,
+    lazy = false,
+    priority = 1000,
+    config = function()
+      -- load the colorscheme here
+      require("config.colorscheme")
+    end,
   },
   {
     "rebelot/kanagawa.nvim",
@@ -17,12 +21,8 @@ return {
   },
   {
     "olimorris/onedarkpro.nvim",
-    lazy = false,
-    priority = 1000,
-    config = function()
-      -- load the colorscheme here
-      require("config.colorscheme")
-    end,
+    lazy = true,
+    priority = 900,
   },
   {
     "oxfist/night-owl.nvim",
