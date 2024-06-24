@@ -9,9 +9,9 @@
 local icons = require("utils.icons")
 
 EcoVim = {
-  -- colorscheme = "tokyonight-storm",
+  -- colorscheme = "tokyonight-moon",
   -- colorscheme = "onedark_dark",
-  colorscheme = "onedark_vivid",
+  -- colorscheme = "onedark_vivid",
   -- colorscheme = "selenized",
   -- colorscheme = "modus_vivendi",     -- the dark theme.
   -- colorscheme = "palenight",
@@ -35,14 +35,15 @@ EcoVim = {
         enabled = false,
       },
       copilot = {
-        enabled = true,
+        enabled = false,
       },
       tabnine = {
         enabled = false,
       },
     },
     completion = {
-      select_first_on_enter = false,
+      -- EJ: This used to be false, maybe this is more natural.
+      select_first_on_enter = true,
     },
     -- Completely replaces the UI for messages, cmdline and the popupmenu
     experimental_noice = {
