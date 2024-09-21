@@ -498,6 +498,10 @@ return {
     end,
   },
   {
+    "echasnovski/mini.nvim",
+    version = false,
+  },
+  {
     "akinsho/bufferline.nvim",
     event = "VeryLazy",
     dependencies = {

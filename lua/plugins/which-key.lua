@@ -21,9 +21,6 @@ wk.setup {
       g = false, -- bindings for prefixed with g
     },
   },
-  -- add operators that will trigger motion and text object completion
-  -- to enable all native operators, set the preset / operators plugin above
-  operators = { gc = "Comments" },
   key_labels = {
     -- override the label used to display some keys. It doesn't effect WK in any other way.
     -- For example:
@@ -36,30 +33,24 @@ wk.setup {
     separator = "➜", -- symbol used between a key and it's label
     group = "+", -- symbol prepended to a group
   },
-  window = {
+  win = {
+    no_overlap = true,
     border = EcoVim.ui.float.border or "rounded", -- none, single, double, shadow, rounded
     position = "bottom", -- bottom, top
     margin = { 1, 0, 1, 0 }, -- extra window margin [top, right, bottom, left]
     padding = { 2, 2, 2, 2 }, -- extra window padding [top, right, bottom, left]
   },
   layout = {
-    height = { min = 4, max = 25 }, -- min and max height of the columns
-    width = { min = 20, max = 50 }, -- min and max width of the columns
-    spacing = 4, -- spacing between columns
-    align = "left", -- align columns left, center or right
+    height = { min = 4, max = 25},
+    width = { min = 20, max = 50},
+    spacing = 4,
   },
-  ignore_missing = false, -- enable this to hide mappings for which you didn't specify a label
-  hidden = { "<silent>", "<cmd>", "<Cmd>", "<CR>", "call", "lua", "^:", "^ "}, -- hide mapping boilerplate
+  -- hidden is deprecated
+  -- hidden = { "<silent>", "<cmd>", "<Cmd>", "<CR>", "call", "lua", "^:", "^ "}, -- hide mapping boilerplate
   show_help = true, -- show help message on the command line when the popup is visible
-  -- triggers = "auto", -- automatically setup triggers
-  triggers = {"<leader>", "<LocalLeader>"}, -- or specify a list manually
-  triggers_blacklist = {
-    -- list of mode / prefixes that should never be hooked by WhichKey
-    -- this is mostly relevant for key maps that start with a native binding
-    -- most people should not need to change this
-    i = { "j", "k" },
-    v = { "j", "k" },
-  },
+  triggers = {
+    { "<auto>", mode = "nxso" },
+  }
 }
 
 local opts = {
@@ -81,16 +72,25 @@ local visual_opts = {
 }
 
 local normal_mode_mappings = {
+    { "<leader>-", "<cmd>vertical resize -5<CR>", desc = "resize +5", nowait = false, remap = false },
+    { "<leader>=", "<cmd>vertical resize +5<CR>", desc = "resize +5", nowait = false, remap = false },
+    { "<leader>/", group = "Ecovim", nowait = false, remap = false },
+    { "<leader>//", "<cmd>Alpha<CR>", desc = "open dashboard", nowait = false, remap = false },
+    { "<leader>/c", "<cmd>e $MYVIMRC<CR>", desc = "open config", nowait = false, remap = false },
+    { "<leader>/i", "<cmd>Lazy<CR>", desc = "manage plugins", nowait = false, remap = false },
+    { "<leader>/s", group = "Session", nowait = false, remap = false },
+    { "<leader>/u", "<cmd>Lazy update<CR>", desc = "update plugins", nowait = false, remap = false },
   -- ignore
-  ['1'] = 'which_key_ignore',
-  ['2'] = 'which_key_ignore',
-  ['3'] = 'which_key_ignore',
-  ['4'] = 'which_key_ignore',
-  ['5'] = 'which_key_ignore',
-  ['6'] = 'which_key_ignore',
-  ['7'] = 'which_key_ignore',
-  ['8'] = 'which_key_ignore',
-  ['9'] = 'which_key_ignore',
+    { "<leader>1", hidden = true, nowait = false, remap = false },
+    { "<leader>2", hidden = true, nowait = false, remap = false },
+    { "<leader>3", hidden = true, nowait = false, remap = false },
+    { "<leader>4", hidden = true, nowait = false, remap = false },
+    { "<leader>5", hidden = true, nowait = false, remap = false },
+    { "<leader>6", hidden = true, nowait = false, remap = false },
+    { "<leader>7", hidden = true, nowait = false, remap = false },
+    { "<leader>8", hidden = true, nowait = false, remap = false },
+    { "<leader>9", hidden = true, nowait = false, remap = false },
+    { "<leader>=", "<cmd>vertical resize +5<CR>", desc = "resize +5", nowait = false, remap = false },
 
   -- single
   ['='] = { '<cmd>vertical resize +5<CR>',                      'resize +5' },
