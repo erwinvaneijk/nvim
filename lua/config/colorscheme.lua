@@ -1,8 +1,16 @@
+
 local present, tokyonight = pcall(require, "tokyonight")
 if not present then
   return
 end
 
+local newpaper = pcall(require, "newpaper")
+if newpaper then
+  require("newpaper").setup({
+    style = "light",
+  })
+  return
+end
 local c = require('tokyonight.colors').setup()
 
 -- ╭──────────────────────────────────────────────────────────╮

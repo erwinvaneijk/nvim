@@ -2,8 +2,13 @@ return {
   -- themes
   {
     "folke/tokyonight.nvim",
-    lazy = false,
+    lazy = true,
+    priority = 900,
+  },
+  {
+    "yorik1984/newpaper.nvim",
     priority = 1000,
+    lazy = false,
     config = function()
       -- load the colorscheme here
       require("config.colorscheme")
