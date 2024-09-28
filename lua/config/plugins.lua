@@ -482,13 +482,6 @@ return {
     end,
   },
   {
-    "ecosse3/galaxyline.nvim",
-    config = function()
-      require("plugins.galaxyline")
-    end,
-    event = "VeryLazy",
-  },
-  {
     "echasnovski/mini.bufremove",
     version = "*",
     config = function()
@@ -663,6 +656,13 @@ return {
     config = function()
       require("mini.ai").setup()
     end,
+  },
+  {
+    "ecosse3/galaxyline.nvim",
+    config = function()
+      require("plugins.galaxyline")
+    end,
+    event = "VeryLazy",
   },
   {
     "lukas-reineke/indent-blankline.nvim",

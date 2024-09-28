@@ -7,7 +7,10 @@ end
 local newpaper = pcall(require, "newpaper")
 if newpaper then
   require("newpaper").setup({
-    style = "light",
+    style = "dark",
+    borders = true,
+    lualine_bold = true,
+    lualine_style = "dark",
   })
   return
 end
