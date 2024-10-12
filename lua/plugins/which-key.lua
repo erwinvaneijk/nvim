@@ -33,13 +33,13 @@ wk.setup {
     separator = "➜", -- symbol used between a key and it's label
     group = "+", -- symbol prepended to a group
   },
-  win = {
-    no_overlap = true,
-    border = EcoVim.ui.float.border or "rounded", -- none, single, double, shadow, rounded
-    position = "bottom", -- bottom, top
-    margin = { 1, 0, 1, 0 }, -- extra window margin [top, right, bottom, left]
-    padding = { 2, 2, 2, 2 }, -- extra window padding [top, right, bottom, left]
-  },
+  -- win = {
+  --    no_overlap = true,
+  --  border = "shadow", -- none, single, double, shadow, rounded
+  --  position = "bottom", -- bottom, top
+  --  -- margin = { 1, 0, 1, 0 }, -- extra window margin [top, right, bottom, left]
+  --  padding = { 2, 2, 2, 2 }, -- extra window padding [top, right, bottom, left]
+  --},
   layout = {
     height = { min = 4, max = 25},
     width = { min = 20, max = 50},
@@ -321,19 +321,6 @@ local function attach_npm(bufnr)
   })
 end
 
-local function attach_zen(bufnr)
-  wk.register({
-    ["z"] = { '<cmd>ZenMode<CR>',               'zen' },
-  }, {
-    buffer = bufnr,
-    mode = "n", -- NORMAL mode
-    prefix = "<leader>",
-    silent = true, -- use `silent` when creating keymaps
-    noremap = true, -- use `noremap` when creating keymaps
-    nowait = false, -- use `nowait` when creating keymaps
-  })
-end
-
 local function attach_jest(bufnr)
   wk.register({
     j = {
@@ -389,7 +376,6 @@ return {
   attach_markdown = attach_markdown,
   attach_typescript = attach_typescript,
   attach_npm = attach_npm,
-  attach_zen = attach_zen,
   attach_jest = attach_jest,
   attach_spectre = attach_spectre,
   attach_nvim_tree = attach_nvim_tree,

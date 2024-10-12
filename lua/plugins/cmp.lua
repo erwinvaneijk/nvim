@@ -111,19 +111,20 @@ end
 -- ╭──────────────────────────────────────────────────────────╮
 -- │ Setup                                                    │
 -- ╰──────────────────────────────────────────────────────────╯
+local icons = require("utils.icons")
 local source_mapping = {
-  npm = EcoVim.icons.terminal .. "NPM",
-  cmp_tabnine = EcoVim.icons.light,
-  Copilot = EcoVim.icons.copilot,
-  Codeium = EcoVim.icons.codeium,
-  nvim_lsp = EcoVim.icons.stack .. "LSP",
-  buffer = EcoVim.icons.buffer .. "BUF",
-  nvim_lua = EcoVim.icons.bomb,
-  luasnip = EcoVim.icons.snippet .. "SNP",
-  calc = EcoVim.icons.calculator,
-  path = EcoVim.icons.folderOpen2,
-  treesitter = EcoVim.icons.tree,
-  zsh = EcoVim.icons.terminal .. "ZSH",
+  npm = icons.terminal .. "NPM",
+  cmp_tabnine = icons.light,
+  Copilot = icons.copilot,
+  Codeium = icons.codeium,
+  nvim_lsp = icons.stack .. "LSP",
+  buffer = icons.buffer .. "BUF",
+  nvim_lua = icons.bomb,
+  luasnip = icons.snippet .. "SNP",
+  calc = icons.calculator,
+  path = icons.folderOpen2,
+  treesitter = icons.tree,
+  zsh = icons.terminal .. "ZSH",
 }
 
 local buffer_option = {
@@ -157,7 +158,7 @@ cmp.setup({
     ["<CR>"] = cmp.mapping.confirm({
       -- this is the important line for Copilot
       behavior = cmp.ConfirmBehavior.Replace,
-      select = EcoVim.plugins.completion.select_first_on_enter,
+      select = true,
     }),
     ["<Tab>"] = cmp.mapping(function(fallback)
       if cmp.visible() then
@@ -327,14 +328,12 @@ cmp.setup({
 -- ╭──────────────────────────────────────────────────────────╮
 -- │ Tabnine Setup                                            │
 -- ╰──────────────────────────────────────────────────────────╯
-if EcoVim.plugins.ai.tabnine.enabled then
-  tabnine:setup({
-    max_lines = 1000,
-    max_num_results = 3,
-    sort = true,
-    show_prediction_strength = true,
-    run_on_every_keystroke = true,
-    snipper_placeholder = "..",
-    ignored_file_types = {},
-  })
-end
+-- tabnine:setup({
+--   max_lines = 1000,
+--   max_num_results = 3,
+--   sort = true,
+--   show_prediction_strength = true,
+--   run_on_every_keystroke = true,
+--   snipper_placeholder = "..",
+--   ignored_file_types = {},
+-- })

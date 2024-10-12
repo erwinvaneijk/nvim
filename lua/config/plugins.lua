@@ -1,70 +1,33 @@
 return {
-  -- themes
-  {
-    "folke/tokyonight.nvim",
-    lazy = true,
-    priority = 900,
+  --{
+  --  "yorik1984/newpaper.nvim",
+  --  priority = 1000,
+  --  lazy = false,
+  --  config = function()
+  --    -- load the colorscheme here
+  --    require("config.colorscheme")
+  --  end,
+  --},
+  { "nvim-lua/plenary.nvim",
+    dependencies = {
+      "nvchad/ui",
+      "nvchad/base46"
+    }
   },
   {
-    "yorik1984/newpaper.nvim",
-    priority = 1000,
+    "nvchad/ui",
     lazy = false,
-    config = function()
-      -- load the colorscheme here
-      require("config.colorscheme")
-    end,
+    config = function ()
+      require("nvchad")
+    end
   },
   {
-    "rebelot/kanagawa.nvim",
-    lazy = true,
-    priority = 900,
+    "nvchad/base46",
+    lazy = false,
+    config = function ()
+      require("base46").load_all_highlights()
+    end
   },
-  {
-    "tanvirtin/monokai.nvim",
-    lazy = true,
-    priority = 900,
-  },
-  {
-    "olimorris/onedarkpro.nvim",
-    lazy = true,
-    priority = 900,
-  },
-  {
-    "oxfist/night-owl.nvim",
-    lazy = true,
-    priority = 900,
-  },
-  {
-    "miikanissi/modus-themes.nvim",
-    lazy = true,
-    priority = 900,
-  },
-  {
-    "ellisonleao/gruvbox.nvim",
-    lazy = true,
-    priority = 900,
-  },
-  {
-    "slugbyte/lackluster.nvim",
-    lazy = true,
-    priority = 900,
-  },
-  {
-    "sainnhe/everforest",
-    lazy = true,
-    priority = 900,
-  },
-  {
-    "alexmozaidze/palenight.nvim",
-    priority = 900,
-    lazy = true,
-  },
-  {
-    "blazkowolf/gruber-darker.nvim",
-    priority = 900,
-    lazy = true,
-  },
-  { "nvim-lua/plenary.nvim" },
   {
     "nvim-tree/nvim-web-devicons",
     config = function()
@@ -288,27 +251,21 @@ return {
       "saadparwaiz1/cmp_luasnip",
       { "l3mon4d3/luasnip", dependencies = "rafamadriz/friendly-snippets" },
       {
-        cond = EcoVim.plugins.ai.tabnine.enabled,
-        "tzachar/cmp-tabnine",
-        build = "./install.sh",
-      },
-      {
         "david-kunz/cmp-npm",
         config = function()
           require("plugins.cmp-npm")
         end,
       },
-      {
-        "zbirenbaum/copilot-cmp",
-        cond = EcoVim.plugins.ai.copilot.enabled,
-        config = function()
-          require("copilot_cmp").setup()
-        end,
-      },
       "petertriho/cmp-git",
     },
   },
-
+  {
+    "folke/noice.nvim",
+    lazy = false,
+    config = function()
+      require('plugins.noice')
+    end,
+  },
   -- lsp addons
   {
     "stevearc/dressing.nvim",
@@ -448,17 +405,8 @@ return {
     end,
   },
   {
-    "folke/zen-mode.nvim",
-    cmd = { "ZenMode" },
-    config = function()
-      require("plugins.zen")
-    end,
-    cond = EcoVim.plugins.zen.enabled,
-  },
-  {
     "folke/twilight.nvim",
     config = true,
-    cond = EcoVim.plugins.zen.enabled,
   },
   {
     "folke/flash.nvim",
@@ -658,13 +606,6 @@ return {
     end,
   },
   {
-    "ecosse3/galaxyline.nvim",
-    config = function()
-      require("plugins.galaxyline")
-    end,
-    event = "VeryLazy",
-  },
-  {
     "lukas-reineke/indent-blankline.nvim",
     event = "bufreadpre",
     main = "ibl",
@@ -673,16 +614,7 @@ return {
     end,
   },
   {
-    "folke/noice.nvim",
-    cond = EcoVim.plugins.experimental_noice.enabled,
-    lazy = false,
-    config = function()
-      require("plugins.noice")
-    end,
-  },
-  {
     "chrisgrieser/nvim-spider",
-    cond = EcoVim.plugins.jump_by_subwords.enabled,
     lazy = true,
     keys = { "w", "e", "b", "ge" },
     config = function()
@@ -707,52 +639,6 @@ return {
     config = function()
       require("plugins.colorizer")
     end,
-  },
-
-  -- ai
-  {
-    "jcdickinson/codeium.nvim",
-    cond = EcoVim.plugins.ai.codeium.enabled,
-    event = "insertenter",
-    cmd = "codeium",
-    dependencies = {
-      "nvim-lua/plenary.nvim",
-      "hrsh7th/nvim-cmp",
-    },
-    config = true,
-  },
-  {
-    "zbirenbaum/copilot.lua",
-    cond = EcoVim.plugins.ai.copilot.enabled,
-    event = "insertenter",
-    config = function()
-      require("plugins.copilot")
-    end,
-  },
-  {
-    "bryley/neoai.nvim",
-    cond = EcoVim.plugins.ai.chatgpt.enabled,
-    dependencies = {
-      "muniftanjim/nui.nvim",
-    },
-    cmd = {
-      "neoai",
-      "neoaiopen",
-      "neoaiclose",
-      "neoaitoggle",
-      "neoaicontext",
-      "neoaicontextopen",
-      "neoaicontextclose",
-      "neoaiinject",
-      "neoaiinjectcode",
-      "neoaiinjectcontext",
-      "neoaiinjectcontextcode",
-    },
-    keys = {
-      { "<leader>as", desc = "summarize text" },
-      { "<leader>ag", desc = "generate git message" },
-    },
-    config = true,
   },
 
   -- git

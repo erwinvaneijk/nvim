@@ -1,4 +1,4 @@
-local icons = EcoVim.icons
+local icons = require("utils.icons")
 
 require('package-info').setup(
   {
