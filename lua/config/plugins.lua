@@ -9,6 +9,7 @@ return {
   --  end,
   --},
   { "nvim-lua/plenary.nvim",
+    lazy = false,
     dependencies = {
       "nvchad/ui",
       "nvchad/base46"
@@ -280,6 +281,7 @@ return {
     "folke/trouble.nvim",
     cmd = { "TroubleToggle", "Trouble" },
     config = function()
+      dofile(vim.g.base46_cache .. "trouble")
       require("plugins.trouble")
     end,
   },
