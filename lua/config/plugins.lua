@@ -316,7 +316,8 @@ return {
       require("plugins.trouble")
     end,
   },
-  { "nvim-lua/popup.nvim" },
+  {
+    "nvim-lua/popup.nvim" },
   {
     "smiteshp/nvim-navic",
     config = function()
@@ -364,7 +365,6 @@ return {
   },
 
   -- general
-  { "andrewradev/switch.vim", lazy = false },
   {
     "wansmer/treesj",
     dependencies = { 'nvim-treesitter/nvim-treesitter'},
@@ -436,10 +436,6 @@ return {
     config = function()
       require("plugins.todo-comments")
     end,
-  },
-  {
-    "folke/twilight.nvim",
-    config = true,
   },
   {
     "folke/flash.nvim",
