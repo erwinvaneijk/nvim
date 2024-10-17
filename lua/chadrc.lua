@@ -4,17 +4,18 @@
 ---@type ChadrcConfig
 local options = {
   base46= {
-    theme = "one_light", 
-    theme_toggle = { "onedark", "one_light" },
+    theme = "Rosepine",
+    theme_toggle = { "Rosepine", "Rosepine-Dawn" },
     transparancy = true,
   },
   ui = {
     cmp = {
-      style = "atom",
+      style = "atom_colored",
+      lspkind_text = false,
+      icons = true,
     },
     statusline = {
-      theme = "default",
-    }
+      theme = "vscode" },
   },
   lsp = {
     signature = true,
