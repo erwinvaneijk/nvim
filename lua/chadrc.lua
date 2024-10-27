@@ -4,8 +4,8 @@
 ---@type ChadrcConfig
 local options = {
   base46= {
-    theme = "Rosepine",
-    theme_toggle = { "Rosepine", "Rosepine-Dawn" },
+    theme = "flexoki-light",
+    theme_toggle = { "flexoki-light", "Rosepine-Dawn" },
     transparancy = true,
   },
   ui = {
