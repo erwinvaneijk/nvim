@@ -10,7 +10,7 @@ local options = {
   foldlevel      = 99,                      --- Using ufo provider need a large value
   foldlevelstart = 99,                      --- Expand all folds by default
   ignorecase     = true,                    --- Needed for smartcase
-  laststatus     = 3,                       --- Have a global statusline at the bottom instead of one for each window
+  --laststatus     = 3,                       --- Have a global statusline at the bottom instead of one for each window
   mouse          = "a",                     --- Enable mouse
   number         = true,                    --- Shows current line number
   pumheight      = 10,                      --- Max num of items in completion menu
@@ -74,11 +74,3 @@ for k, v in pairs(globals) do
   vim.g[k] = v
 end
 
--- make the theme switch to light when it is betwee 8 and 19:00.
--- outside those hours we'll call it night and dark.
-local timer = vim.loop.new_timer()
-timer:start(0, 600, vim.schedule_wrap(function()
-  local hour = tonumber(os.date("%H"))
-  local bg = (hour > 8 and hour < 18) and 'light' or 'dark'
-  if vim.o.background ~= bg then vim.o.background = bg end
-end))

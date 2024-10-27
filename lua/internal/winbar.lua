@@ -67,7 +67,8 @@ M.gps = function()
   else
     if not isempty(navic_location) then
       local hl_group = "LineNr"
-      return retval .. " " .. "%#" .. hl_group .. "#" .. EcoVim.icons.caretRight .. "%*" .. " " .. navic_location
+      local icons = require("utils.icons")
+      return retval .. " " .. "%#" .. hl_group .. "#" .. icons.caretRight .. "%*" .. " " .. navic_location
     else
       return retval
     end

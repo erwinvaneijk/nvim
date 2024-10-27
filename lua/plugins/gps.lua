@@ -41,7 +41,7 @@ gps.setup({
     }
   },
 
-  separator = " " .. "%#" .. hl_group .. "#" .. EcoVim.icons.caretRight .. "%*",
+  separator = " " .. "%#" .. hl_group .. "#" .. icons.caretRight .. "%*",
 
   -- limit for amount of context shown
   -- 0 means no limit
