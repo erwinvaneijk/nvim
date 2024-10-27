@@ -90,19 +90,18 @@ return {
     },
   },
   {
-    "nvim-tree/nvim-tree.lua",
-    cmd = {
-      "NvimTreeOpen",
-      "NvimTreeClose",
-      "NvimTreeToggle",
-      "NvimTreeFindFile",
-      "NvimTreeFindFileToggle",
-    },
-    keys = {
-      { "<c-e>", "<cmd>lua require('nvim-tree.api').tree.toggle()<cr>", desc = "nvimtree" },
+    "nvim-neo-tree/neo-tree.nvim",
+    lazy = false,
+    branch = "v3.x",
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+      "nvim-tree/nvim-web-devicons",
+      "MinifTanjim/nui.nvim",
+      "3rd/image.nvim",
     },
     config = function()
-      require("plugins.tree")
+      require("plugins.neotree")
+      vim.cmd([[nnoremap \ :Neotree reveal<cr>]])
     end,
   },
   {
