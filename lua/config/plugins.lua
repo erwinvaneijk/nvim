@@ -57,7 +57,6 @@ return {
       "rrethy/nvim-treesitter-textsubjects",
     },
   },
-
   -- navigating (telescope/tree/refactor)
   {
     "nvim-pack/nvim-spectre",
@@ -635,14 +634,6 @@ return {
     end,
   },
   {
-    "lukas-reineke/indent-blankline.nvim",
-    event = "bufreadpre",
-    main = "ibl",
-    config = function()
-      require("plugins.indent")
-    end,
-  },
-  {
     "chrisgrieser/nvim-spider",
     lazy = true,
     keys = { "w", "e", "b", "ge" },
@@ -826,27 +817,6 @@ return {
       if not require("nvim-treesitter.parsers").has_parser("dap_repl") then
         vim.cmd(":tsinstall dap_repl")
       end
-    end,
-  },
-  {
-    "lukas-reineke/virt-column.nvim",
-    dev = true,
-    config = function ()
-      require("virt-column").setup {}
-      require("virt-column").overwrite {
-        virtcolumn = "+1",
-        hightlight = "virtcolumn",
-        exclude = {
-          filetypes = {
-            "lspinfo",
-            "packer",
-            "checkhealth",
-            "man",
-            "telescopeprompt",
-            "telesecoperesults",
-          },
-        },
-      }
     end,
   },
   {
