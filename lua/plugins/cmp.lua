@@ -1,8 +1,6 @@
 local lspkind = require("lspkind")
 local types = require("cmp.types")
 
-local _, tabnine = pcall(require, "cmp_tabnine.config")
-
 local cmp_status_ok, cmp = pcall(require, "cmp")
 if not cmp_status_ok then
   P("Failed to load cmp")
@@ -114,7 +112,6 @@ end
 local icons = require("utils.icons")
 local source_mapping = {
   npm = icons.terminal .. "NPM",
-  cmp_tabnine = icons.light,
   Copilot = icons.copilot,
   Codeium = icons.codeium,
   nvim_lsp = icons.stack .. "LSP",
@@ -232,16 +229,6 @@ cmp.setup({
       item_with_kind.menu = vim.trim(item_with_kind.menu or "")
       item_with_kind.abbr = string.sub(item_with_kind.abbr, 1, item_with_kind.maxwidth)
 
-      if entry.source.name == "cmp_tabnine" then
-        if entry.completion_item.data ~= nil and entry.completion_item.data.detail ~= nil then
-          item_with_kind.kind = " " .. lspkind.symbolic("Event", { with_text = false }) .. " TabNine"
-          item_with_kind.menu = item_with_kind.menu .. entry.completion_item.data.detail
-        else
-          item_with_kind.kind = " " .. lspkind.symbolic("Event", { with_text = false }) .. " TabNine"
-          item_with_kind.menu = item_with_kind.menu .. " TBN"
-        end
-      end
-
       local completion_context = get_lsp_completion_context(entry.completion_item, entry.source)
       if completion_context ~= nil and completion_context ~= "" then
         item_with_kind.menu = item_with_kind.menu .. [[ -> ]] .. completion_context
@@ -262,7 +249,7 @@ cmp.setup({
   sources = {
     {
       name = "copilot",
-      priority = 10,
+      priority = 7,
       max_item_count = 3,
     },
     {
@@ -274,7 +261,6 @@ cmp.setup({
     { name = "npm",         priority = 9 },
     { name = "codeium",     priority = 9 },
     { name = "git",         priority = 7 },
-    { name = "cmp_tabnine", priority = 7 },
     {
       name = "luasnip",
       priority = 7,
@@ -325,15 +311,3 @@ cmp.setup({
   }
 })
 
--- ╭──────────────────────────────────────────────────────────╮
--- │ Tabnine Setup                                            │
--- ╰──────────────────────────────────────────────────────────╯
--- tabnine:setup({
---   max_lines = 1000,
---   max_num_results = 3,
---   sort = true,
---   show_prediction_strength = true,
---   run_on_every_keystroke = true,
---   snipper_placeholder = "..",
---   ignored_file_types = {},
--- })

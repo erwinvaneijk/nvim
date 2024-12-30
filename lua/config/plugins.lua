@@ -42,7 +42,6 @@ return {
       require("plugins.alpha")
     end,
   },
-
   -- treesitter
   {
     "nvim-treesitter/nvim-treesitter",
@@ -57,6 +56,7 @@ return {
       "rrethy/nvim-treesitter-textsubjects",
     },
   },
+  
   -- navigating (telescope/tree/refactor)
   {
     "nvim-pack/nvim-spectre",
@@ -85,7 +85,7 @@ return {
       { "nvim-lua/popup.nvim" },
       { "nvim-lua/plenary.nvim" },
       { "cljoly/telescope-repo.nvim" },
-      { "nvim-telescope/telescope-frecency.nvim" },
+      -- { "nvim-telescope/telescope-frecency.nvim" },
     },
   },
   {
@@ -248,12 +248,19 @@ return {
       "hrsh7th/cmp-path",
       "hrsh7th/cmp-cmdline",
       "hrsh7th/cmp-calc",
+      "onsails/lspkind-nvim",
       "saadparwaiz1/cmp_luasnip",
       { "l3mon4d3/luasnip", dependencies = "rafamadriz/friendly-snippets" },
       {
         "david-kunz/cmp-npm",
         config = function()
           require("plugins.cmp-npm")
+        end,
+      },
+      {
+        "zbirenbaum/copilot-cmp",
+        config = function()
+          require("copilot_cmp").setup()
         end,
       },
       "petertriho/cmp-git",
@@ -753,6 +760,15 @@ return {
     end,
   },
 
+  {
+    "zbirenbaum/copilot.lua",
+    lazy = false,
+    cmd = "Copilot",
+    event = "InsertEnter",
+    config = function()
+      require("plugins.copilot")
+    end,
+  },
   -- testing
   {
     "rcarriga/neotest",
