@@ -4,13 +4,14 @@
 ---@type ChadrcConfig
 local options = {
   base46= {
-    theme = "flexoki-light",
-    theme_toggle = { "flexoki-light", "Rosepine-Dawn" },
+    theme = "Rxyhn",
+    theme_toggle = { "Rxyhn", "Oceanic-Light" },
     transparancy = true,
   },
   ui = {
     cmp = {
-      style = "atom_colored",
+      -- style = "atom_colored",
+      style = "default",
       lspkind_text = false,
       icons = true,
     },
