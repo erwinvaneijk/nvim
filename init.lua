@@ -9,6 +9,7 @@ vim.g.loaded_ruby_provider = false
 
 require("chadrc")
 
+
 require('utils.globals')
 require('utils.functions')
 
@@ -16,6 +17,7 @@ require('config.options')
 
 require('config.lazy')
 
+dofile(vim.g.base46_cache .. "syntax")
 dofile(vim.g.base46_cache .. "defaults")
 dofile(vim.g.base46_cache .. "statusline")
 

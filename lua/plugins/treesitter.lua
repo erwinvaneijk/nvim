@@ -1,6 +1,8 @@
-require 'nvim-treesitter.configs'.setup {
-  ensure_installed = {
+require('nvim-treesitter').install({
+    "bash",
+    "c",
     "cpp",
+    "diff",
     "rust",
     "gitcommit",
     "json",
@@ -9,9 +11,10 @@ require 'nvim-treesitter.configs'.setup {
     "markdown",
     "toml",
     "vim",
-  },                              -- one of "all", or a list of languages
-  sync_install = false,           -- install languages synchronously (only applied to `ensure_installed`)
+})
+require 'nvim-treesitter'.setup {
   ignore_install = { "haskell" }, -- list of parsers to ignore installing
+  auto_install = true,
   highlight = {
     enable = true,
     -- disable = { "c", "rust" },  -- list of language that will be disabled

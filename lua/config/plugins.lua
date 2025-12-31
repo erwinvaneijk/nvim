@@ -18,7 +18,10 @@ return {
     lazy = false,
     config = function ()
       require("base46").load_all_highlights()
-    end
+    end,
+    keys = {
+      { "<leader>tt", "<cmd>Telescope themes<cr>", "Select possible themes"},
+    }
   },
   {
     "nvim-tree/nvim-tree.lua",
@@ -41,15 +44,17 @@ return {
   {
     "nvim-treesitter/nvim-treesitter",
     event = "bufreadpre",
-    config = function()
-      require("plugins.treesitter")
-    end,
+    build = ":TSUpdate",
+    lazy = false,
     dependencies = {
       "hiphish/rainbow-delimiters.nvim",
       "joosepalviste/nvim-ts-context-commentstring",
       "nvim-treesitter/nvim-treesitter-textobjects",
       "rrethy/nvim-treesitter-textsubjects",
     },
+    config = function()
+      require("plugins.treesitter")
+    end,
   },
   -- navigating (telescope/tree/refactor)
   {

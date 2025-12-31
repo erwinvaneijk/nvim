@@ -7,6 +7,8 @@ local options = {
     -- theme = "Mito-Laser",
     -- theme = "Tundra",
     -- theme_toggle = { "Rxyhn", "Oceanic-Light" },
+    -- theme = "tundra",
+    theme = "eldritch",
     transparancy = true,
   },
   ui = {
@@ -17,7 +19,8 @@ local options = {
       icons = true,
     },
     statusline = {
-      theme = "vscode" },
+      theme = "vscode" 
+    },
   },
   lsp = {
     signature = true,
