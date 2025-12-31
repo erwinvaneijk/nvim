@@ -49,7 +49,7 @@ vim.api.nvim_create_user_command("LspToggleAutoFormat", 'lua require("lsp.functi
 function M.custom_hover_handler(_, _)
   local handler = function(_, result)
     if result then
-      local colorizer = require("colorizer")
+      local colorizer = require("plugin.colorizer")
 
       local lines = vim.split(result.contents.value, "\n")
       local bufnr =

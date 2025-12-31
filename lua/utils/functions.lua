@@ -1,7 +1,7 @@
 -- Exported functions
 local M = {}
 
-local present, win = pcall(require, "lspconfig.ui.windows")
+local present, win = pcall(require, "vim.lsp.config.ui.windows")
 if not present then
   return
 end

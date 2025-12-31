@@ -22,7 +22,7 @@ function M.debounce_trailing(fn, ms, first)
 			local argc = select('#', ...)
 
 			timer:start(ms, 0, function()
-				pcall(vim.schedule_wrap(fn), unpack(argv, 1, argc))
+				pcall(vim.schedule_wrap(fn), table.unpack(argv, 1, argc))
 			end)
 		end
 	else
@@ -32,7 +32,7 @@ function M.debounce_trailing(fn, ms, first)
 			argc = argc or select('#', ...)
 
 			timer:start(ms, 0, function()
-				pcall(vim.schedule_wrap(fn), unpack(argv, 1, argc))
+				pcall(vim.schedule_wrap(fn), table.unpack(argv, 1, argc))
 			end)
 		end
 	end

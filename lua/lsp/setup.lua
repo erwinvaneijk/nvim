@@ -34,8 +34,6 @@ mason_lsp.setup({
   automatic_installation = true,
 })
 
-local lspconfig = require("lspconfig")
-
 local handlers = {
   ["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
     silent = true,
@@ -60,19 +58,33 @@ capabilities.textDocument.foldingRange = {
 
 -- Order matters
 
-lspconfig.lua_ls.setup({
+vim.lsp.config["lua_ls"] = {
   capabilities = capabilities,
   handlers = handlers,
   on_attach = on_attach,
   settings = require("lsp.servers.lua_ls").settings,
-})
+}
 
-for _, server in ipairs({ "bashls",  "graphql",  "clangd" }) do
-  lspconfig[server].setup({
+vim.lsp.config['clangd'] = {
+  capabilities = capabilities,
+  handlers = handlers,
+  on_attach = on_attach,
+  cmd = {
+    "clangd",
+    "--background-index",
+    "--clang-tidy",
+    "--completion-style=detailed",
+    "--header-insertion=never",
+    "--header-insertion-decorators=0",
+  },
+}
+
+for _, server in ipairs({ "bashls",  "graphql" }) do
+  vim.lsp.config[server] = {
     on_attach = on_attach,
     capabilities = capabilities,
     handlers = handlers,
-  })
+  }
 end
 
 require("ufo").setup({

@@ -1,13 +1,4 @@
 return {
-  --{
-  --  "yorik1984/newpaper.nvim",
-  --  priority = 1000,
-  --  lazy = false,
-  --  config = function()
-  --    -- load the colorscheme here
-  --    require("config.colorscheme")
-  --  end,
-  --},
   { "nvim-lua/plenary.nvim",
     lazy = false,
     dependencies = {
@@ -30,16 +21,20 @@ return {
     end
   },
   {
+    "nvim-tree/nvim-tree.lua",
+    lazy = false,
+    config = function()
+      require("plugins.nvim-tree")
+    end,
+    keys = {
+      { "\\", "<cmd>NvimTreeToggle<cr>", desc = "toggle file explorer" },
+      { "<leader>fe", "<cmd>NvimTreeFocus<cr>", desc = "focus file explorer" },
+    },
+  },
+  {
     "nvim-tree/nvim-web-devicons",
     config = function()
       require("nvim-web-devicons").setup({ default = true })
-    end,
-  },
-  {
-    "goolord/alpha-nvim",
-    lazy = false,
-    config = function()
-      require("plugins.alpha")
     end,
   },
   -- treesitter
@@ -56,7 +51,6 @@ return {
       "rrethy/nvim-treesitter-textsubjects",
     },
   },
-  
   -- navigating (telescope/tree/refactor)
   {
     "nvim-pack/nvim-spectre",
@@ -87,21 +81,6 @@ return {
       { "cljoly/telescope-repo.nvim" },
       -- { "nvim-telescope/telescope-frecency.nvim" },
     },
-  },
-  {
-    "nvim-neo-tree/neo-tree.nvim",
-    lazy = false,
-    branch = "v3.x",
-    dependencies = {
-      "nvim-lua/plenary.nvim",
-      "nvim-tree/nvim-web-devicons",
-      "MinifTanjim/nui.nvim",
-      "3rd/image.nvim",
-    },
-    config = function()
-      require("plugins.neotree")
-      vim.cmd([[nnoremap \ :Neotree reveal<cr>]])
-    end,
   },
   {
     "gbprod/stay-in-place.nvim",
@@ -182,7 +161,6 @@ return {
   {
     "linux-cultist/venv-selector.nvim",
     dependencies = { 'neovim/nvim-lspconfig', 'nvim-telescope/telescope.nvim', 'mfussenegger/nvim-dap-python' },
-    branch = "regexp",
     opts = {
       name = { "venv", ".venv" },
       auto_refresh = false,
@@ -465,19 +443,6 @@ return {
     end,
   },
   {
-    "echasnovski/mini.bufremove",
-    version = "*",
-    config = function()
-      require("mini.bufremove").setup({
-        silent = true,
-      })
-    end,
-  },
-  {
-    "echasnovski/mini.nvim",
-    version = false,
-  },
-  {
     "akinsho/bufferline.nvim",
     event = "VeryLazy",
     dependencies = {
@@ -518,20 +483,13 @@ return {
       { "<leader>bsr", "<cmd>bufferlinesortbyrelativedirectory<cr>", desc = "sort by relative dir" },
     },
   },
-  {
-    "rcarriga/nvim-notify",
-    event = "VeryLazy",
-    config = function()
-      require("plugins.notify")
-    end,
-  },
-  {
-    "j-hui/fidget.nvim",
-    event = "VeryLazy",
-    config = function()
-      require("plugins.fidget")
-    end,
-  },
+--   {
+--     "j-hui/fidget.nvim",
+--     event = "VeryLazy",
+--     config = function()
+--       require("plugins.fidget")
+--     end,
+--   },
   {
     "vuki656/package-info.nvim",
     event = "bufenter package.json",
@@ -546,31 +504,6 @@ return {
       vim.g.mkdp_filetypes = { "markdown" }
     end,
     ft = { "markdown" },
-  },
-  {
-    "ahmedkhalf/project.nvim",
-    event = "bufwinenter",
-    config = function()
-      require("project_nvim").setup({
-        -- configuration goes here.
-        detection_methods = { "lsp", "pattern" },
-        patterns = {
-          ".git",
-          "*.git",
-          "_darcs",
-          ".hg",
-          ".bzr",
-          ".svn",
-          "makefile",
-          "cargo.toml",
-          "package.json",
-          "!.git/worktrees",
-        },
-        exclude_dirs = { "~/.cargo/*" },
-        silent_chdir = true,
-        scope_chdir = "global",
-      })
-    end,
   },
   {
     "shatur/neovim-session-manager",
@@ -602,42 +535,20 @@ return {
   {
     "kevinhwang91/nvim-ufo",
     dependencies = "kevinhwang91/promise-async",
-    config = function()
-      vim.keymap.set("n", "zr", require("ufo").openAllFolds)
-      vim.keymap.set("n", "zm", require("ufo").closeAllFolds)
-      vim.keymap.set("n", "zr", require("ufo").openFoldsExceptKinds)
-      -- taken from https://github.com/kevinhwang91/nvim-ufo
-      -- tell the server the capability of foldingrange,
-      -- neovim hasn't added foldingrange to default capabilities, users must add it manually
-      local capabilities = vim.lsp.protocol.make_client_capabilities()
-      capabilities.textDocument.foldingRange = {
-          dynamicRegistration = false,
-          lineFoldingOnly = true
-      }
-      local language_servers = require("lspconfig").util.available_servers() -- or list servers manually like {'gopls', 'clangd'}
-      for _, ls in ipairs(language_servers) do
-          require('lspconfig')[ls].setup({
-              capabilities = capabilities
-              -- you can add other fields for setting up lsp server in this table
-          })
-      end
-      require('ufo').setup()
-    end,
-  },
-  --{
-  --  "echasnovski/mini.align",
-  --  lazy = false,
-  --  version = "*",
-  --  config = function()
-  --    require("mini.align").setup()
-  --  end,
-  --},
-  {
-    "echasnovski/mini.ai",
-    lazy = false,
-    version = "*",
-    config = function()
-      require("mini.ai").setup()
+    opts = {
+      filetype_exclude = { 'help', 'alpha', 'dashboard', 'neo-tree', 'Trouble', 'lazy', 'mason' },
+    },
+    config = function(_, opts)
+      vim.api.nvim_create_autocmd('FileType', {
+        group = vim.api.nvim_create_augroup('local_detach_ufo', { clear = true }),
+        pattern = opts.filetype_exclude,
+        callback = function()
+          require('ufo').detach()
+        end,
+      })
+
+      vim.opt.foldlevelstart = 99
+      require('ufo').setup(opts)
     end,
   },
   {
@@ -667,7 +578,6 @@ return {
       require("plugins.colorizer")
     end,
   },
-
   -- git
   {
     "lewis6991/gitsigns.nvim",
@@ -698,20 +608,6 @@ return {
     keys = {
       { "<leader>gd", "<cmd>lua require('plugins.git.diffview').toggle_file_history()<cr>", desc = "diff file" },
       { "<leader>gs", "<cmd>lua require('plugins.git.diffview').toggle_status()<cr>", desc = "status" },
-    },
-  },
-  {
-    "akinsho/git-conflict.nvim",
-    lazy = false,
-    config = function()
-      require("plugins.git.conflict")
-    end,
-    keys = {
-      { "<leader>gcb", "<cmd>gitconflictchooseboth<cr>", desc = "choose both" },
-      { "<leader>gcn", "<cmd>gitconflictnextconflict<cr>", desc = "move to next conflict" },
-      { "<leader>gcc", "<cmd>gitconflictchooseours<cr>", desc = "choose current" },
-      { "<leader>gcp", "<cmd>gitconflictprevconflict<cr>", desc = "move to prev conflict" },
-      { "<leader>gci", "<cmd>gitconflictchoosetheirs<cr>", desc = "choose incoming" },
     },
   },
   {
@@ -759,16 +655,19 @@ return {
       require("plugins.git.octo")
     end,
   },
-
   {
-    "zbirenbaum/copilot.lua",
+    "github/copilot.vim",
     lazy = false,
-    cmd = "Copilot",
-    event = "InsertEnter",
-    config = function()
-      require("plugins.copilot")
-    end,
   },
+--   {
+--     "zbirenbaum/copilot.lua",
+--     lazy = false,
+--     cmd = "Copilot",
+--     event = "InsertEnter",
+--     config = function()
+--       require("plugins.copilot")
+--     end,
+--   },
   -- testing
   {
     "rcarriga/neotest",

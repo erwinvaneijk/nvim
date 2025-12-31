@@ -4,8 +4,9 @@
 ---@type ChadrcConfig
 local options = {
   base46= {
-    theme = "Rxyhn",
-    theme_toggle = { "Rxyhn", "Oceanic-Light" },
+    -- theme = "Mito-Laser",
+    -- theme = "Tundra",
+    -- theme_toggle = { "Rxyhn", "Oceanic-Light" },
     transparancy = true,
   },
   ui = {

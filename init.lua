@@ -1,6 +1,11 @@
 vim.g.base46_cache = vim.fn.stdpath "data" .. "/base46_cache/"
 
+vim.g.loaded_netrw = 1 -- Disable netrw, as we use nvim-tree
+vim.g.loaded_netrwPlugin = 1 -- Disable netrw, as we use nvim-tree
 vim.g.have_nerd_font = true
+vim.g.loaded_perl_provider = false
+vim.g.loaded_node_provider = false
+vim.g.loaded_ruby_provider = false
 
 require("chadrc")
 
@@ -25,3 +30,4 @@ require('lsp.setup')
 require('lsp.functions')
 
 require('snippets.react')
+
