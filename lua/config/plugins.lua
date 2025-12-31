@@ -45,6 +45,9 @@ return {
     "nvim-treesitter/nvim-treesitter",
     event = "bufreadpre",
     build = ":TSUpdate",
+    -- the newest version doesn't quite work now, so stick to master for now
+    -- TODO: integrate the newest version when it's stable
+    branch = "master",
     lazy = false,
     dependencies = {
       "hiphish/rainbow-delimiters.nvim",

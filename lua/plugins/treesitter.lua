@@ -1,4 +1,5 @@
-require('nvim-treesitter').install({
+require 'nvim-treesitter.configs'.setup {
+  ensure_installed = {
     "bash",
     "c",
     "cpp",
@@ -11,8 +12,7 @@ require('nvim-treesitter').install({
     "markdown",
     "toml",
     "vim",
-})
-require 'nvim-treesitter'.setup {
+  },
   ignore_install = { "haskell" }, -- list of parsers to ignore installing
   auto_install = true,
   highlight = {

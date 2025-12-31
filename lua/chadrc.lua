@@ -8,7 +8,7 @@ local options = {
     -- theme = "Tundra",
     -- theme_toggle = { "Rxyhn", "Oceanic-Light" },
     -- theme = "tundra",
-    theme = "eldritch",
+    theme = "falcon",
     transparancy = true,
   },
   ui = {
