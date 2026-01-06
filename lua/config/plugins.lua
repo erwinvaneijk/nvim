@@ -1,27 +1,40 @@
 return {
-  { "nvim-lua/plenary.nvim",
-    lazy = false,
-    dependencies = {
-      "nvchad/ui",
-      "nvchad/base46"
-    }
-  },
+  { "nvim-lua/plenary.nvim", lazy = false, dependencies = {
+    "nvchad/ui",
+    "nvchad/base46",
+  } },
   {
     "nvchad/ui",
     lazy = false,
-    config = function ()
+    config = function()
       require("nvchad")
-    end
+    end,
   },
   {
     "nvchad/base46",
     lazy = false,
-    config = function ()
+    config = function()
       require("base46").load_all_highlights()
     end,
     keys = {
-      { "<leader>tt", "<cmd>Telescope themes<cr>", "Select possible themes"},
-    }
+      { "<leader>tt", "<cmd>Telescope themes<cr>", "Select possible themes" },
+    },
+  },
+  {
+    "L3MON4D3/LuaSnip",
+    dependencies = {
+      "rafamadriz/friendly-snippets",
+      config = function()
+        require("luasnip.loaders.from_vscode").lazy_load()
+        require("luasnip.loaders.from_lua").load({ paths = { "~/.config/nvim/lua/snippets/" } })
+      end,
+    },
+  },
+  {
+    "Saghen/blink.cmp",
+    dependencies = { "rafamadriz/friendly-snippets" },
+    lazy = false,
+    opts = require("plugins.blink"),
   },
   {
     "nvim-tree/nvim-tree.lua",
@@ -123,7 +136,6 @@ return {
     dependencies = {
       "mason.nvim",
       "williamboman/mason-lspconfig.nvim",
-      "hrsh7th/cmp-nvim-lsp",
     },
     servers = nil,
   },
@@ -168,16 +180,16 @@ return {
   -- python support
   {
     "linux-cultist/venv-selector.nvim",
-    dependencies = { 'neovim/nvim-lspconfig', 'nvim-telescope/telescope.nvim', 'mfussenegger/nvim-dap-python' },
+    dependencies = { "neovim/nvim-lspconfig", "nvim-telescope/telescope.nvim", "mfussenegger/nvim-dap-python" },
     opts = {
       name = { "venv", ".venv" },
       auto_refresh = false,
     },
     event = "VeryLazy",
     keys = {
-      { '<leader>vs', '<cmd>VenvSelect<cr>' },
-      { '<leader>vc', '<cmd>VenvSelectCached<cr>' },
-    }
+      { "<leader>vs", "<cmd>VenvSelect<cr>" },
+      { "<leader>vc", "<cmd>VenvSelectCached<cr>" },
+    },
   },
   -- code formatters
   {
@@ -220,43 +232,11 @@ return {
       end, { desc = "format file or range (in visual mode)" })
     end,
   },
-  -- lsp cmp
-  {
-    "hrsh7th/nvim-cmp",
-    event = "insertenter",
-    config = function()
-      require("plugins.cmp")
-    end,
-    dependencies = {
-      "hrsh7th/cmp-nvim-lua",
-      "hrsh7th/cmp-nvim-lsp",
-      "hrsh7th/cmp-buffer",
-      "hrsh7th/cmp-path",
-      "hrsh7th/cmp-cmdline",
-      "hrsh7th/cmp-calc",
-      "onsails/lspkind-nvim",
-      "saadparwaiz1/cmp_luasnip",
-      { "l3mon4d3/luasnip", dependencies = "rafamadriz/friendly-snippets" },
-      {
-        "david-kunz/cmp-npm",
-        config = function()
-          require("plugins.cmp-npm")
-        end,
-      },
-      {
-        "zbirenbaum/copilot-cmp",
-        config = function()
-          require("copilot_cmp").setup()
-        end,
-      },
-      "petertriho/cmp-git",
-    },
-  },
   {
     "folke/noice.nvim",
     lazy = false,
     config = function()
-      require('plugins.noice')
+      require("plugins.noice")
     end,
   },
   -- lsp addons
@@ -309,7 +289,8 @@ return {
     end,
   },
   {
-    "nvim-lua/popup.nvim" },
+    "nvim-lua/popup.nvim",
+  },
   {
     "smiteshp/nvim-navic",
     config = function()
@@ -359,7 +340,7 @@ return {
   -- general
   {
     "wansmer/treesj",
-    dependencies = { 'nvim-treesitter/nvim-treesitter'},
+    dependencies = { "nvim-treesitter/nvim-treesitter" },
     lazy = true,
     cmd = { "TSJToggle", "TSJSplit", "TSJJoin" },
     keys = {
@@ -411,7 +392,7 @@ return {
       hide_handbook = false,
       save_path = function()
         return vim.fn.stdpath("cache") .. "/arrow"
-      end
+      end,
     },
   },
   {
@@ -491,13 +472,13 @@ return {
       { "<leader>bsr", "<cmd>bufferlinesortbyrelativedirectory<cr>", desc = "sort by relative dir" },
     },
   },
---   {
---     "j-hui/fidget.nvim",
---     event = "VeryLazy",
---     config = function()
---       require("plugins.fidget")
---     end,
---   },
+  --   {
+  --     "j-hui/fidget.nvim",
+  --     event = "VeryLazy",
+  --     config = function()
+  --       require("plugins.fidget")
+  --     end,
+  --   },
   {
     "vuki656/package-info.nvim",
     event = "bufenter package.json",
@@ -544,19 +525,19 @@ return {
     "kevinhwang91/nvim-ufo",
     dependencies = "kevinhwang91/promise-async",
     opts = {
-      filetype_exclude = { 'help', 'alpha', 'dashboard', 'neo-tree', 'Trouble', 'lazy', 'mason' },
+      filetype_exclude = { "help", "alpha", "dashboard", "neo-tree", "Trouble", "lazy", "mason" },
     },
     config = function(_, opts)
-      vim.api.nvim_create_autocmd('FileType', {
-        group = vim.api.nvim_create_augroup('local_detach_ufo', { clear = true }),
+      vim.api.nvim_create_autocmd("FileType", {
+        group = vim.api.nvim_create_augroup("local_detach_ufo", { clear = true }),
         pattern = opts.filetype_exclude,
         callback = function()
-          require('ufo').detach()
+          require("ufo").detach()
         end,
       })
 
       vim.opt.foldlevelstart = 99
-      require('ufo').setup(opts)
+      require("ufo").setup(opts)
     end,
   },
   {
@@ -667,15 +648,15 @@ return {
     "github/copilot.vim",
     lazy = false,
   },
---   {
---     "zbirenbaum/copilot.lua",
---     lazy = false,
---     cmd = "Copilot",
---     event = "InsertEnter",
---     config = function()
---       require("plugins.copilot")
---     end,
---   },
+  --   {
+  --     "zbirenbaum/copilot.lua",
+  --     lazy = false,
+  --     cmd = "Copilot",
+  --     event = "InsertEnter",
+  --     config = function()
+  --       require("plugins.copilot")
+  --     end,
+  --   },
   -- testing
   {
     "rcarriga/neotest",
