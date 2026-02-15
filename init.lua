@@ -7,6 +7,14 @@ vim.g.loaded_perl_provider = false
 vim.g.loaded_node_provider = false
 vim.g.loaded_ruby_provider = false
 
+local function getWords()
+  if vim.fn.mode() == 'v' or vim.fn.mode() == 'V' then
+    return vim.fn.wordcount().visual_words .. " words"
+  else
+    return vim.fn.wordcount().words .. " words"
+  end
+end
+
 require("chadrc")
 
 

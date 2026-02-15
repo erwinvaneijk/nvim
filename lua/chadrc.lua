@@ -19,7 +19,7 @@ local options = {
       icons = true,
     },
     statusline = {
-      theme = "vscode" 
+      theme = "vscode",
     },
   },
   lsp = {

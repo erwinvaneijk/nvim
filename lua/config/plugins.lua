@@ -21,6 +21,10 @@ return {
     },
   },
   {
+    "nvchad/volt",
+    lazy = false,
+  },
+  {
     "L3MON4D3/LuaSnip",
     dependencies = {
       "rafamadriz/friendly-snippets",
@@ -32,8 +36,12 @@ return {
   },
   {
     "Saghen/blink.cmp",
-    dependencies = { "rafamadriz/friendly-snippets" },
+    dependencies = {
+      "rafamadriz/friendly-snippets",
+      "onsails/lspkind.nvim",
+    },
     lazy = false,
+    version = "*",
     opts = require("plugins.blink"),
   },
   {
@@ -195,36 +203,30 @@ return {
   {
     "stevearc/conform.nvim",
     event = { "bufreadpre", "bufnewfile" },
+    opts = {
+      lua = {"stylua"},
+      python = {"black", "isort"},
+      bash = {"beautysh"},
+      markdown = { "prettierd", "prettier" },
+      rust = { "rustfmt" },
+    },
     config = function()
-      local conform = require("conform")
-      conform.setup({
-        formatters_by_ft = {
-          lua = { "stylua" },
-          svelte = { { "prettierd", "prettier" } },
-          javascript = { { "prettierd", "prettier" } },
-          typescript = { { "prettierd", "prettier" } },
-          javascriptreact = { { "prettierd", "prettier" } },
-          typescriptreact = { { "prettierd", "prettier" } },
-          json = { { "prettierd", "prettier" } },
-          graphql = { { "prettierd", "prettier" } },
-          java = { "google-java-format" },
-          kotlin = { "ktlint" },
-          ruby = { "standardrb" },
-          markdown = { { "prettierd", "prettier" } },
-          erb = { "htmlbeautifier" },
-          html = { "htmlbeautifier" },
-          bash = { "beautysh" },
-          proto = { "buf" },
-          rust = { "rustfmt" },
-          yaml = { "yamlfix" },
-          toml = { "taplo" },
-          css = { { "prettierd", "prettier" } },
-          scss = { { "prettierd", "prettier" } },
-        },
-      })
-
+      vim.api.nvim_create_user_command("Reformat", function(args)
+        local range = nil
+        if args.count ~= -1 then
+          local end_line = vim.api.nvim_buf_get_lines(0, args.line2 - 1, args.line2, true)[1]
+          range = { start = {args.line1, 0 },
+            ["end"] = { args.line2, end_line:len() },
+          }
+        end
+        require("conform").format({
+          lsp_fallback = true,
+          async = true,
+          range = range,
+        })
+      end, { desc = "format file", range = true })
       vim.keymap.set({ "n", "v" }, "<leader>lf", function()
-        conform.format({
+        require("conform").format({
           lsp_fallback = true,
           async = false,
           timeout_ms = 500,
@@ -413,6 +415,7 @@ return {
   {
     "folke/flash.nvim",
     event = "VeryLazy",
+    ---@type flash.config
     opts = {},
     -- stylua: ignore
     keys = {
@@ -647,6 +650,14 @@ return {
   {
     "github/copilot.vim",
     lazy = false,
+  },
+  {
+    -- Atone presents your undo history
+    -- as a tree, making it easier to visualize and navigate through your changes.
+    "XXiaoA/atone.nvim",
+    lazy = false,
+    opts = {},
+    cmd = "Atone",
   },
   --   {
   --     "zbirenbaum/copilot.lua",
