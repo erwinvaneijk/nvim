@@ -778,6 +778,11 @@ return {
     end,
   },
   {
+    "ghostty",
+    lazy = false,
+    dir = "/Applications/Ghostty.app/Contents/Resources/vim/vimfiles/",
+  },
+  {
     "wakatime/vim-wakatime",
     lazy = false,
     config = function()
